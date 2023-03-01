@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 
 function App() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    fetch("/api/headlines")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-
-  useEffect(() => {
-    console.log({data})
-  }, [data])
-
-  return <div>Hello</div>;
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  );
 }
 
 export default App;

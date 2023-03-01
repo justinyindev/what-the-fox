@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const config = require("./config");
 const Headline = require("./models/headline");
 const PORT = process.env.PORT || 3001;
+require('dotenv').config()
 
 // Connect to the MongoDB database
-mongoose.connect(config.mongoURI, {
+mongoose.connect(process.env.MONGO_DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

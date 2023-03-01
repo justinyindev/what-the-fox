@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./config");
 const Headline = require("./models/headline");
+const PORT = process.env.PORT || 3001;
 
 // Connect to the MongoDB database
 mongoose.connect(config.mongoURI, {
@@ -12,8 +13,12 @@ mongoose.connect(config.mongoURI, {
 // Create an instance of the Express application
 const app = express();
 
+app.get('/', async (req, res) => {
+  console.log("What the vox!");
+  res.send("What the vox!")
+})
 // Define an endpoint for retrieving headlines from the database
-app.get('/headlines', async (req, res) => {
+app.get('/api/headlines', async (req, res) => {
   try {
     const headlines = await Headline.find().lean();
     res.json(headlines);
@@ -25,7 +30,7 @@ app.get('/headlines', async (req, res) => {
 });
 
 // Start the Express server
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
 

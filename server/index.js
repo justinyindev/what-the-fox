@@ -20,16 +20,31 @@ scrapeFoxNewsHeadlines = async () => {
     const page = await browser.newPage();
     await page.goto("https://www.vox.com");
 
+    // Find the top news headline and link
     const result = await page.evaluate(() => {
       const headlineEl = document.querySelector(
         "h2.c-entry-box--compact__title a"
       );
       return {
         headline: headlineEl.textContent.trim(),
-        url: headlineEl.href,
+        link: headlineEl.href
       };
     });
 
+    // Scroll to the article image and headline
+    await page.evaluate(() => {
+      const imageEl = document.querySelector(
+        "div.c-newspaper__column div a img"
+      );
+      if(imageEl){
+        imageEl.scrollIntoView();
+      }
+    });
+    // Wait for the image and headline to finish loading
+    await page.waitForSelector("div.c-newspaper__column div a img");
+    await page.waitForSelector("h2.c-entry-box--compact__title a");
+
+    // Take a screenshot of the article and headline
     const screenshot = await page.screenshot({
       type: "jpeg",
       quality: 60,
@@ -38,9 +53,9 @@ scrapeFoxNewsHeadlines = async () => {
 
     const headline = new Headline({
       title: result.headline,
-      url: result.url,
+      url: result.link,
       date: new Date(),
-      image: screenshot
+      image: screenshot,
     });
     await browser.close();
 

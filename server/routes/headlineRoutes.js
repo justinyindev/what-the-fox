@@ -3,6 +3,6 @@ const headlineController = require("./../controllers/headlineController");
 
 const router = express.Router();
 
-router.get('/', headlineController.getHeadlines);
+router.get('/headline', headlineController.getHeadlines);
 
 module.exports = router;

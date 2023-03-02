@@ -1,5 +1,6 @@
 const Headline = require("./../models/headline");
-const scrapeSummary = require("./../utils/scrapeSummary");
+const getArticleContent = require("../utils/getArticleContent");
+const summarizeContent = require("../utils/summarizeContent");
 
 exports.getHeadlines = async (req, res) => {
   try {
@@ -9,19 +10,13 @@ exports.getHeadlines = async (req, res) => {
       const headlines = await Headline.find({
         date: { $gte: startTime, $lte: endTime },
       }).lean();
+
       res.json(headlines);
     } else {
-      const headlines = await Headline.findOne().sort({ date: -1 }).lean();
-      res.json([headlines]);
+      const headline = await Headline.findOne().sort({ date: -1 }).lean();
+      res.json([headline]);
     }
     // TO DO
-    // const processedHeadlines = await Promise.all(headlines.map(async (headline) => {
-    //   const summary = await scrapeSummary(headline.url);
-    //   return {
-    //     ...headline,
-    //     summary
-    //   };
-    // }));
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

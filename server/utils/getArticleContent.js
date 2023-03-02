@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-const scrapeSummary = async (url) => {
+const getArticleContent = async (url) => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url);
@@ -29,4 +29,4 @@ const scrapeSummary = async (url) => {
   return articleContent;
 };
 
-module.exports = scrapeSummary;
+module.exports = getArticleContent;

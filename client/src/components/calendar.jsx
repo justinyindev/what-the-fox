@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import axios from 'axios';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Calendar() {
-  const [startDate, setStartDate] = useState(new Date().setHours(0,0,0,0));
-  const [endDate, setEndDate] = useState(new Date().setHours(23,59,59,999));
+  const [startDate, setStartDate] = useState(new Date().setHours(0, 0, 0, 0));
+  const [endDate, setEndDate] = useState(new Date().setHours(23, 59, 59, 999));
   const [headlines, setHeadlines] = useState([]);
 
   const handleStartDateChange = (date) => {
-    setStartDate(new Date(date).setHours(0,0,0,0));
+    setStartDate(new Date(date).setHours(0, 0, 0, 0));
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(new Date(date).setHours(23,59,59,999));
+    setEndDate(new Date(date).setHours(23, 59, 59, 999));
   };
 
   const fetchHeadlines = async () => {
     try {
-      const response = await axios.get('/api/headlines', {
+      const response = await axios.get("/api/headlines", {
         params: {
           startDateTime: startDate,
           endDateTime: endDate,
@@ -32,9 +32,16 @@ function Calendar() {
 
   return (
     <div>
-      <h1>Select a date range</h1>
-      <DatePicker selected={startDate} onChange={(date) => handleStartDateChange(date)} />
-      <DatePicker selected={endDate} onChange={(date) => handleEndDateChange(date)} />
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => handleStartDateChange(date)}
+        />
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => handleEndDateChange(date)}
+        />
+      </div>
       <button onClick={fetchHeadlines}>Fetch headlines</button>
       <ul>
         {headlines.map((headline) => (
@@ -46,4 +53,3 @@ function Calendar() {
 }
 
 export default Calendar;
-

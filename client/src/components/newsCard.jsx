@@ -14,11 +14,11 @@ const NewsCard = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const response = await axios.get("/api/headlines");
+        const response = await axios.get("/api/headline");
         console.log(response.data);
 
-        dispatch(setIsLoading(false));
         dispatch(setHeadlines(response.data));
+        dispatch(setIsLoading(false));
       } catch (error) {
         console.error(error);
       }
@@ -34,6 +34,7 @@ const NewsCard = () => {
           <span className="newscard-loading-welcome">Hello...</span>
         </div>
       ) : (
+        headlines &&
         headlines.map((item) => {
           return (
             <div key={item}>

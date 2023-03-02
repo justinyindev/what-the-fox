@@ -23,7 +23,7 @@ function Calendar() {
   const fetchHeadlines = async () => {
     try {
       dispatch(setIsLoading(true));
-      const response = await axios.get("/api/headlines", {
+      const response = await axios.get("/api/headline", {
         params: {
           startDateTime: startDate,
           endDateTime: endDate,

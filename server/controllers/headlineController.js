@@ -22,3 +22,15 @@ exports.getHeadlines = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+exports.getSummary = async (req, res) => {
+  try {
+    const url = req.query.url;
+    const articleContent = await getArticleContent(url);
+    const summarizedContent = summarizeContent(articleContent);
+
+    res.json({ summary: summarizedContent });
+  } catch (error) {
+    console.error(error);
+  }
+};

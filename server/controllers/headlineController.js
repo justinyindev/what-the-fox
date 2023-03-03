@@ -9,7 +9,9 @@ exports.getHeadlines = async (req, res) => {
       const endTime = req.query.endDateTime;
       const headlines = await Headline.find({
         date: { $gte: startTime, $lte: endTime },
-      }).sort({date: -1}).lean();
+      })
+        .sort({ date: -1 })
+        .lean();
 
       res.json(headlines);
     } else {
@@ -26,10 +28,23 @@ exports.getHeadlines = async (req, res) => {
 exports.getSummary = async (req, res) => {
   try {
     const url = req.query.url;
-    const articleContent = await getArticleContentMulti(url);
-    const summarizedContent = summarizeContent(articleContent);
+    const title = req.query.title;
+    const headline = await Headline.findOne({ title: title }).lean();
 
-    res.json({ summary: summarizedContent });
+    if (!headline.summary) {
+      const articleContent = await getArticleContentMulti(url);
+      const summarizedContent = summarizeContent(articleContent);
+
+      console.log("saving summary to database");
+      await Headline.updateOne(
+        { _id: headline._id },
+        { summary: summarizedContent }
+      );
+
+      res.json({ summary: summarizedContent });
+    }
+    console.log("summary found in database")
+    res.json({ summary: headline.summary });
   } catch (error) {
     console.error(error);
   }

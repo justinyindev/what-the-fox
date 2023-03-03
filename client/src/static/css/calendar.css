@@ -35,7 +35,6 @@ body {
   border-radius: 5px;
   padding: 8px;
   margin: 8px;
-
 }
 
 .calendar-button {
@@ -54,8 +53,7 @@ body {
   font-weight: 600;
   justify-content: center;
   height: 24px;
-  margin: 0;
-  margin-bottom: 8px;
+  margin: 8px;
   padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
   text-decoration: none;
@@ -69,7 +67,7 @@ body {
 
 .calendar-button:hover,
 .calendar-button:focus {
-    background-color: #f0f0f1;
+  background-color: #f0f0f1;
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   color: #4c4e4d;

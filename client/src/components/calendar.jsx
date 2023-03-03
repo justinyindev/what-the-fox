@@ -51,10 +51,10 @@ function Calendar() {
           selected={endDate}
           onChange={(date) => handleEndDateChange(date)}
         />
+        <button className="calendar-button" onClick={fetchHeadlines}>
+          WTV
+        </button>
       </div>
-      <button className="calendar-button" onClick={fetchHeadlines}>
-        WTV
-      </button>
     </div>
   );
 }

@@ -16,9 +16,12 @@ export const getHeadlines = async (startDate, endDate) => {
   return response.data;
 };
 
-export const getSummary = async (url) => {
+export const getSummary = async (item) => {
   const response = await axios.get("http://localhost:3001/api/summarize", {
-    params: { url: url },
+    params: {
+      url: item.url,
+      title: item.title
+    },
   });
 
   return response.data;

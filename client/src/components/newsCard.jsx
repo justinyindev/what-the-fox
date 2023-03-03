@@ -29,24 +29,33 @@ const NewsCard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchSummary = async (url) => {
+  const fetchSummary = async (item) => {
     try {
-      setLoadingSummary((prevLoading) => ({ ...prevLoading, [url]: true }));
+      setLoadingSummary((prevLoading) => ({
+        ...prevLoading,
+        [item.url]: true,
+      }));
 
-      const response = await getSummary(url);
+      const response = await getSummary(item);
       const summary = response.summary;
 
-      setSummaries((prevSummaries) => ({ ...prevSummaries, [url]: summary }));
-      setLoadingSummary((prevLoading) => ({ ...prevLoading, [url]: false }));
+      setSummaries((prevSummaries) => ({
+        ...prevSummaries,
+        [item.url]: summary,
+      }));
+      setLoadingSummary((prevLoading) => ({
+        ...prevLoading,
+        [item.url]: false,
+      }));
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleSummarize = async (url) => {
+  const handleSummarize = async (item) => {
     // If we have not visited this article
-    if (!summaries[url]) {
-      await fetchSummary(url);
+    if (!summaries[item.url]) {
+      await fetchSummary(item);
     } else {
       console.log("Already viisted!");
     }
@@ -58,7 +67,7 @@ const NewsCard = () => {
         <div className="newscard-loading-welcome-container">
           <Typewriter
             options={{
-              strings: ["Loading", "News"],
+              strings: ["Loading News"],
               autoStart: true,
               loop: true,
             }}
@@ -66,19 +75,16 @@ const NewsCard = () => {
         </div>
       ) : (
         headlines &&
-          headlines.map((item) => {
-            const loading = summaryLoading[item.url];
-            const summary = summaries[item.url];
+        headlines.map((item) => {
+          const loading = summaryLoading[item.url];
+          const summary = summaries[item.url];
 
-            const splitString = item.title.split(" ");
-            const firstThree = splitString.slice(0, 3).join(" ");
-            const restOfWords = splitString.slice(3).join(" ");
+          const splitString = item.title.split(" ");
+          const firstThree = splitString.slice(0, 3).join(" ");
+          const restOfWords = splitString.slice(3).join(" ");
 
-            return (
-              <div
-                key={item._id}
-                className="newscard-main-card-container"
-            >
+          return (
+            <div key={item._id} className="newscard-main-card-container">
               <div className="newscard-heading-container">
                 <a href={item.url}>
                   <h2 className="newscard-heading">
@@ -101,14 +107,24 @@ const NewsCard = () => {
                   <button
                     className="newscard-tldr-button"
                     onClick={() => {
-                      handleSummarize(item.url);
+                      handleSummarize(item);
                     }}
                     disabled={loading}
                   >
                     TL;DR
                   </button>
-                  {summary && (
-                    <p className="newscard-tldr-text fade-in">{summary}</p>
+                  {loading ? (
+                    <Typewriter
+                      options={{
+                        strings: ["Scraping article", "summarizing..."],
+                        autoStart: true,
+                        loop: true,
+                      }}
+                    />
+                  ) : (
+                    summary && (
+                      <p className="newscard-tldr-text fade-in">{summary}</p>
+                    )
                   )}
                 </div>
               </div>

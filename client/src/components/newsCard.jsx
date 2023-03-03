@@ -4,6 +4,7 @@ import { setHeadlines } from "../redux/headlinesSlice";
 import { setIsLoading } from "../redux/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeadlines, getSummary } from "../utils/apiService";
+import Typewriter from "typewriter-effect";
 
 const NewsCard = () => {
   const { headlines } = useSelector((state) => state.headlines);
@@ -54,22 +55,38 @@ const NewsCard = () => {
   return (
     <div className="newscard-container">
       {loading ? (
-        <span className="newscard-loading-welcome">Hello... I'm loading</span>
+        <div className="newscard-loading-welcome-container">
+          <Typewriter
+            options={{
+              strings: ["Loading", "News"],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </div>
       ) : (
         headlines &&
-        headlines.map((item) => {
-          const loading = summaryLoading[item.url];
-          const summary = summaries[item.url];
+          headlines.map((item) => {
+            const loading = summaryLoading[item.url];
+            const summary = summaries[item.url];
 
-          const splitString = item.title.split(' ');
-          const firstThree = splitString.slice(0, 3).join(' ');
-          const restOfWords = splitString.slice(3).join(' '); 
+            const splitString = item.title.split(" ");
+            const firstThree = splitString.slice(0, 3).join(" ");
+            const restOfWords = splitString.slice(3).join(" ");
 
-          return (
-            <div key={item._id} className="newscard-main-card-container slide-in">
+            return (
+              <div
+                key={item._id}
+                className="newscard-main-card-container"
+            >
               <div className="newscard-heading-container">
                 <a href={item.url}>
-                  <h2 className="newscard-heading"><span className="newscard-heading-highlighted">{firstThree}</span> {restOfWords}</h2>
+                  <h2 className="newscard-heading">
+                    <span className="newscard-heading-highlighted">
+                      {firstThree}
+                    </span>{" "}
+                    {restOfWords}
+                  </h2>
                 </a>
               </div>
               <div className="newscard-image-text-container">
@@ -90,7 +107,9 @@ const NewsCard = () => {
                   >
                     TL;DR
                   </button>
-                  {summary && <p className="newscard-tldr-text fade-in">{summary}</p>}
+                  {summary && (
+                    <p className="newscard-tldr-text fade-in">{summary}</p>
+                  )}
                 </div>
               </div>
             </div>

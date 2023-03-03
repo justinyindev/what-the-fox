@@ -5,6 +5,7 @@ import { setHeadlines } from "../redux/headlinesSlice";
 import { setIsLoading } from "../redux/loadingSlice";
 import { useDispatch } from "react-redux";
 import { getHeadlines } from "../utils/apiService";
+import "../static/css/calendar.css";
 
 function Calendar() {
   const dispatch = useDispatch();
@@ -12,11 +13,15 @@ function Calendar() {
   const [endDate, setEndDate] = useState(new Date().setHours(23, 59, 59, 999));
 
   const handleStartDateChange = (date) => {
-    setStartDate(new Date(date).setHours(0, 0, 0, 0));
+    if (date.getTime() < endDate) {
+      setStartDate(new Date(date).setHours(0, 0, 0, 0));
+    }
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(new Date(date).setHours(23, 59, 59, 999));
+    if (date.getTime() > startDate) {
+      setEndDate(new Date(date).setHours(23, 59, 59, 999));
+    }
   };
 
   const fetchHeadlines = async () => {
@@ -32,18 +37,24 @@ function Calendar() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="calendar-main-container">
+      <div className="calendar-picker-container">
+        <span className="calendar-picker-heading">Start Time</span>
         <DatePicker
+          className="calendar-picker"
           selected={startDate}
           onChange={(date) => handleStartDateChange(date)}
         />
+        <span className="calendar-picker-heading">End Time</span>
         <DatePicker
+          className="calendar-picker"
           selected={endDate}
           onChange={(date) => handleEndDateChange(date)}
         />
       </div>
-      <button onClick={fetchHeadlines}>Fetch headlines</button>
+      <button className="calendar-button" onClick={fetchHeadlines}>
+        WTV
+      </button>
     </div>
   );
 }

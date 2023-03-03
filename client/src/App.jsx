@@ -1,19 +1,16 @@
 import React from "react";
 import "./static/css/App.css";
-import NewsCard from "./components/newsCard";
+import HomePage from "./components/homePage";
 import Calendar from "./components/calendar";
 import logo from "./static/images/wtv2.png";
 
 function App() {
-  
   return (
-    <div className="homepage">
-      <img className="homepage-banner-logo" src={logo} alt="logo" />
-      <div className="homepage-banner"></div>
-      <NewsCard />
-      <div className="homepage-calendar-container">
-        <Calendar />
-      </div>
+    <div>
+      <img className="banner-logo" src={logo} alt="logo" />
+      <div className="banner"></div>
+      <Calendar />
+      <HomePage />
     </div>
   );
 }

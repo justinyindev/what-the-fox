@@ -6,6 +6,7 @@ import { setIsLoading } from "../redux/loadingSlice";
 import { useDispatch } from "react-redux";
 import { getHeadlines } from "../utils/apiService";
 import "../static/css/calendar.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Calendar() {
   const dispatch = useDispatch();
@@ -38,19 +39,23 @@ function Calendar() {
 
   return (
     <div className="calendar-main-container">
-      <div className="calendar-picker-container">
-        <span className="calendar-picker-heading">Start Time</span>
-        <DatePicker
-          className="calendar-picker"
-          selected={startDate}
-          onChange={(date) => handleStartDateChange(date)}
-        />
-        <span className="calendar-picker-heading">End Time</span>
-        <DatePicker
-          className="calendar-picker"
-          selected={endDate}
-          onChange={(date) => handleEndDateChange(date)}
-        />
+      <div className="calendar-container">
+        <div className="calendar-item-container">
+          <span className="calendar-picker-heading">Start Time</span>
+          <DatePicker
+            className="calendar-picker"
+            selected={startDate}
+            onChange={(date) => handleStartDateChange(date)}
+          />
+        </div>
+        <div className="calendar-item-container">
+          <span className="calendar-picker-heading">End Time</span>
+          <DatePicker
+            className="calendar-picker"
+            selected={endDate}
+            onChange={(date) => handleEndDateChange(date)}
+          />
+        </div>
         <button className="calendar-button" onClick={fetchHeadlines}>
           WTV
         </button>

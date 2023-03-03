@@ -14,7 +14,7 @@ body {
 }
 
 .newscard-loading-welcome {
-  display: flex;
+  height: 100%;
   padding: 24px;
 }
 
@@ -49,9 +49,9 @@ body {
   opacity: 0;
 }
 
-.newscard-heading-highlighted{
-padding: 1px 2px 1px 2px;
-background-color: #FFF200;
+.newscard-heading-highlighted {
+  padding: 1px 2px 1px 2px;
+  background-color: #fff200;
 }
 
 .newscard-image-text-container {

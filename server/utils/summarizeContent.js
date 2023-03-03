@@ -1,5 +1,6 @@
 const SummarizerManager = require("node-summarizer").SummarizerManager;
 const NUMBER_OF_SENTENCES = 7;
+require("dotenv").config();
 
 const summarizeContent = (text_to_summarize) => {
   const Summarizer = new SummarizerManager(

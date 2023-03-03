@@ -30,7 +30,7 @@ exports.getSummary = async (req, res) => {
     const url = req.query.url;
     const title = req.query.title;
     const headline = await Headline.findOne({ title: title }).lean();
-
+    
     if (!headline.summary) {
       const articleContent = await getArticleContentMulti(url);
       const summarizedContent = summarizeContent(articleContent);
@@ -42,9 +42,10 @@ exports.getSummary = async (req, res) => {
       );
 
       res.json({ summary: summarizedContent });
+    } else {
+      const summary = headline.summary;
+      res.json({ summary: summary });
     }
-    console.log("summary found in database")
-    res.json({ summary: headline.summary });
   } catch (error) {
     console.error(error);
   }

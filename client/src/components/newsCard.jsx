@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./newsCard.css";
+import "./../static/css/newsCard.css";
 import { setHeadlines } from "../redux/headlinesSlice";
 import { setIsLoading } from "../redux/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getHeadlines, getSummary } from "../utils/apiService";
 
 const NewsCard = () => {
   const { headlines } = useSelector((state) => state.headlines);
@@ -16,10 +16,9 @@ const NewsCard = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const response = await axios.get("/api/headline");
-        console.log(response.data);
+        const response = await getHeadlines();
 
-        dispatch(setHeadlines(response.data));
+        dispatch(setHeadlines(response));
         dispatch(setIsLoading(false));
       } catch (error) {
         console.error(error);
@@ -29,13 +28,13 @@ const NewsCard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getSummary = async (url) => {
+  const fetchSummary = async (url) => {
     try {
       setLoadingSummary((prevLoading) => ({ ...prevLoading, [url]: true }));
-      const response = await axios.get("/api/summarize", {
-        params: { url: url },
-      });
-      const summary = response.data.summary;
+
+      const response = await getSummary(url);
+      const summary = response.summary;
+
       setSummaries((prevSummaries) => ({ ...prevSummaries, [url]: summary }));
       setLoadingSummary((prevLoading) => ({ ...prevLoading, [url]: false }));
     } catch (error) {
@@ -46,47 +45,53 @@ const NewsCard = () => {
   const handleSummarize = async (url) => {
     // If we have not visited this article
     if (!summaries[url]) {
-      await getSummary(url);
+      await fetchSummary(url);
     } else {
       console.log("Already viisted!");
     }
   };
 
   return (
-    <div>
+    <div className="newscard-container">
       {loading ? (
-        <div className="newscard-loading-container">
-          <span className="newscard-loading-welcome">Hello...</span>
-        </div>
+        <span className="newscard-loading-welcome">Hello... I'm loading</span>
       ) : (
         headlines &&
         headlines.map((item) => {
           const loading = summaryLoading[item.url];
           const summary = summaries[item.url];
+
+          const splitString = item.title.split(' ');
+          const firstThree = splitString.slice(0, 3).join(' ');
+          const restOfWords = splitString.slice(3).join(' '); 
+
           return (
-            <div key={item._id}>
+            <div key={item._id} className="newscard-main-card-container slide-in">
               <div className="newscard-heading-container">
                 <a href={item.url}>
-                  <h2 className="newscard-heading">{item.title}</h2>
+                  <h2 className="newscard-heading"><span className="newscard-heading-highlighted">{firstThree}</span> {restOfWords}</h2>
                 </a>
               </div>
               <div className="newscard-image-text-container">
-                {/* <img
-                  className="newscard-image"
-                  src={`data:image/jpeg;base64,${item.image}`}
-                  alt={item.title}
-                /> */}
-              </div>
-              <div>
-                <button
-                  onClick={() => {
-                    handleSummarize(item.url);
-                  }}
-                  disabled={loading}
-                >
-                  TL;DR
-                </button>
-                {summary && <p>{summary}</p>}
+                <div className="newscard-image-container">
+                  <img
+                    className="newscard-image fade-in"
+                    src={`data:image/jpeg;base64,${item.image}`}
+                    alt={item.title}
+                  />
+                </div>
+                <div className="newscard-tldr-container">
+                  <button
+                    className="newscard-tldr-button"
+                    onClick={() => {
+                      handleSummarize(item.url);
+                    }}
+                    disabled={loading}
+                  >
+                    TL;DR
+                  </button>
+                  {summary && <p className="newscard-tldr-text fade-in">{summary}</p>}
+                </div>
               </div>
             </div>
           );

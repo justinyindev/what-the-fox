@@ -1,0 +1,168 @@
+body {
+  font-weight: 100px;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+}
+
+.newscard-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.newscard-loading-welcome {
+  display: flex;
+  padding: 24px;
+}
+
+.newscard-main-card-container {
+  background-color: #f3f4f5;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding: 16px;
+  width: 65%;
+  height: auto;
+
+  animation: slide-in 1s forwards;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.newscard-heading-container {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+  padding: 16px 24px;
+}
+
+.newscard-heading {
+  text-decoration: none;
+  color: #4c4e4d;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 36px;
+
+  animation: slide-in 1.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.newscard-heading-highlighted{
+padding: 1px 2px 1px 2px;
+background-color: #FFF200;
+}
+
+.newscard-image-text-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.newscard-image-container {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-bottom: 20px;
+
+  animation: slide-in 1.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.newscard-image {
+  width: 100%;
+  height: 100%;
+}
+
+.newscard-tldr-container {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  padding-right: 24px;
+
+  animation: slide-in 1.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.newscard-tldr-text {
+  font-size: 13.5px;
+  color: #4c4e4d;
+  line-height: 18.9px;
+  letter-spacing: 0.7px;
+  word-spacing: 2px;
+}
+
+.newscard-tldr-button {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  height: 24px;
+  margin: 0;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.newscard-tldr-button:hover,
+.newscard-tldr-button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.newscard-tldr-button:hover {
+  transform: translateY(-1px);
+}
+
+.newscard-tldr-button:active {
+  background-color: #f0f0f1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+.newscard-tldr-button:disabled {
+  background-color: #4c4e4d;
+  color: #ffffff;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

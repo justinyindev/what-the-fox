@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import { setHeadlines } from "../redux/headlinesSlice";
 import { setIsLoading } from "../redux/loadingSlice";
 import { useDispatch } from "react-redux";
+import { getHeadlines } from "../utils/apiService";
 
 function Calendar() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date().setHours(0, 0, 0, 0));
   const [endDate, setEndDate] = useState(new Date().setHours(23, 59, 59, 999));
-  // const [headlines, setHeadlines] = useState([]);
 
   const handleStartDateChange = (date) => {
     setStartDate(new Date(date).setHours(0, 0, 0, 0));
@@ -23,15 +22,10 @@ function Calendar() {
   const fetchHeadlines = async () => {
     try {
       dispatch(setIsLoading(true));
-      const response = await axios.get("/api/headline", {
-        params: {
-          startDateTime: startDate,
-          endDateTime: endDate,
-        },
-      });
+      const response = await getHeadlines(startDate, endDate);
 
       dispatch(setIsLoading(false));
-      dispatch(setHeadlines(response.data));
+      dispatch(setHeadlines(response));
     } catch (error) {
       console.error(error);
     }
@@ -50,11 +44,6 @@ function Calendar() {
         />
       </div>
       <button onClick={fetchHeadlines}>Fetch headlines</button>
-      {/* <ul>
-        {headlines.map((headline) => (
-          <li key={headline._id}>{headline.title}</li>
-        ))}
-      </ul> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 const Headline = require("./../models/headline");
-const getArticleContent = require("../utils/getArticleContent");
+const getArticleContentMulti = require("../utils/getArticleContent");
 const summarizeContent = require("../utils/summarizeContent");
 
 exports.getHeadlines = async (req, res) => {
@@ -9,7 +9,7 @@ exports.getHeadlines = async (req, res) => {
       const endTime = req.query.endDateTime;
       const headlines = await Headline.find({
         date: { $gte: startTime, $lte: endTime },
-      }).lean();
+      }).sort({date: -1}).lean();
 
       res.json(headlines);
     } else {
@@ -26,7 +26,7 @@ exports.getHeadlines = async (req, res) => {
 exports.getSummary = async (req, res) => {
   try {
     const url = req.query.url;
-    const articleContent = await getArticleContent(url);
+    const articleContent = await getArticleContentMulti(url);
     const summarizedContent = summarizeContent(articleContent);
 
     res.json({ summary: summarizedContent });

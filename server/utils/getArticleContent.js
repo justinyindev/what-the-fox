@@ -3,6 +3,10 @@ const puppeteer = require("puppeteer");
 const getArticleContent = async (url) => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
+  await page.setUserAgent(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+  );
+  
   await page.goto(url);
 
   // Wait for the <div> element with class c-entry-content to be loaded
@@ -12,10 +16,9 @@ const getArticleContent = async (url) => {
   const articleContent = await page.evaluate(() => {
     // Get all of the <p> and <h3> tags under the <div> element with class c-entry-content
     const paragraphs = [
-      ...document.querySelectorAll(".c-entry-content p, .c-entry-content h3"),
+      ...document.querySelectorAll(".c-entry-content p"),
     ];
 
-    // Filter out any elements with class name = c-article-footer
     const filteredParagraphs = paragraphs.filter(
       (p) => !p.closest(".c-article-footer")
     );
@@ -25,6 +28,8 @@ const getArticleContent = async (url) => {
 
     return content;
   });
+
+  await page.close();
 
   return articleContent;
 };

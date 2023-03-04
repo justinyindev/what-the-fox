@@ -5,6 +5,11 @@
   padding-right: 24px;
 }
 
+.tldr-text-container{
+  max-width: 100%;
+  margin-top: 8px;
+}
+
 .tldr-text {
   font-size: 13.5px;
   color: #4c4e4d;

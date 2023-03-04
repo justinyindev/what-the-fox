@@ -35,7 +35,7 @@ const HomePage = () => {
       ) : (
         headlines &&
         headlines.map((item) => {
-          return <NewsCard item={item} />;
+          return <NewsCard item={item} key={item._id} />;
         })
       )}
     </div>

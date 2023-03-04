@@ -1,27 +1,42 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const { graphqlHTTP } = require("express-graphql");
+const schema = require("./graphql/schema/index");
+const root = require("./graphql/resolvers/index");
+require("dotenv").config();
 
-// Connect to the MongoDB database
-mongoose.connect(process.env.MONGO_DB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// Create an instance of the Express application
 const app = express();
+
+app.use(bodyParser.json());
 app.use(
   cors({
     origin: ["http://localhost:3000"],
   })
 );
 
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
+
 const headlineRoutes = require("./routes/headlineRoutes");
 app.use("/api", headlineRoutes);
 
-// Start the Express server
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+mongoose
+  .connect(process.env.MONGO_DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

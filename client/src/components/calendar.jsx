@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import "../static/css/calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-function Calendar() {
+const Calendar = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.loading);
   const [startDate, setStartDate] = useState(new Date().setHours(0, 0, 0, 0));
@@ -66,6 +66,6 @@ function Calendar() {
       )}
     </div>
   );
-}
+};
 
 export default Calendar;

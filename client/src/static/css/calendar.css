@@ -13,6 +13,8 @@ body {
   left: 0;
   align-items: center;
   justify-content: center;
+  z-index: 999;
+
   animation: slide-in 1s forwards;
 }
 
@@ -45,16 +47,38 @@ body {
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
     Arial, sans-serif;
   font-weight: 600;
-  border: 1px solid #4c4e4d;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 8px;
   margin: 8px;
   max-width: 55%;
 }
 
+.react-datepicker__day{
+  background-color: burlywood;
+}
+
+.react-datepicker__day--selected{
+  background-color: indianred;
+}
+
+.react-datepicker__current-month{
+  background-color: yellow;
+}
+
+.react-datepicker__header{
+  background-color: blue;
+}
+
+.react-datepicker__month-container{
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  background-color: red;
+}
+
 .calendar-button {
   align-items: center;
-  background-color: #f0f0f1;
+  background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;

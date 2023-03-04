@@ -11,6 +11,11 @@ require("dotenv").config();
 const app = express();
 
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
 
 app.use(
   "/graphql",
@@ -18,12 +23,6 @@ app.use(
     schema: schema,
     rootValue: root,
     graphiql: true,
-  })
-);
-
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
   })
 );
 

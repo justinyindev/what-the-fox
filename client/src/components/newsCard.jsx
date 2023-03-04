@@ -17,7 +17,7 @@ const NewsCard = ({ item }) => {
   const { firstThree, restOfWords } = separateHeading(item.title);
 
   return (
-    <div key={item._id} className="newscard-main-card-container">
+    <div className="newscard-main-card-container">
       <div className="newscard-heading-container">
         <a href={item.url}>
           <h2 className="newscard-heading">

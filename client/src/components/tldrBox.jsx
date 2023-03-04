@@ -4,16 +4,17 @@ import Typewriter from "typewriter-effect";
 import "./../static/css/tldrBox.css";
 
 const TldrBox = ({ item }) => {
-  const [summaries, setSummaries] = useState("");
+  const [summary, setSummary] = useState("");
   const [summaryLoading, setLoadingSummary] = useState(false);
 
   const fetchSummary = async (item) => {
     try {
       setLoadingSummary(true);
-      const response = await getSummary(item);
+
+      const response = await getSummary(item.title, item.url);
       const summary = response.summary;
 
-      setSummaries(summary);
+      setSummary(summary);
       setLoadingSummary(false);
     } catch (error) {
       console.error(error);
@@ -21,11 +22,10 @@ const TldrBox = ({ item }) => {
   };
 
   const handleSummarize = async (item) => {
-    // If we have not visited this article
-    if (!summaries[item.url]) {
+    if (item.url) {
       await fetchSummary(item);
     } else {
-      console.log("Already viisted!");
+      console.log("Invalid URL");
     }
   };
 
@@ -49,7 +49,7 @@ const TldrBox = ({ item }) => {
           }}
         />
       ) : (
-        summaries && <p className="tldr-text fade-in">{summaries}</p>
+        summary && <p className="tldr-text fade-in">{summary}</p>
       )}
     </div>
   );

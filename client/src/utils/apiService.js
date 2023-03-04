@@ -1,28 +1,56 @@
-import axios from "axios";
+import { GraphQLClient } from "graphql-request";
+
+const endpoint = "http://localhost:3001/graphql";
 
 export const getHeadlines = async (startDate, endDate) => {
+  const client = new GraphQLClient(endpoint);
   if (startDate && endDate) {
-    const response = await axios.get("http://localhost:3001/api/headline", {
-      params: {
-        startDateTime: startDate,
-        endDateTime: endDate,
-      },
-    });
-
-    return response.data;
+    startDate = new Date(startDate).toISOString();
+    endDate = new Date(endDate).toISOString();
   }
 
-  const response = await axios.get("http://localhost:3001/api/headline");
-  return response.data;
+  const query = `
+    query GetHeadlines($startDate: String, $endDate: String) {
+      headlines(startDate: $startDate, endDate: $endDate) {
+        _id
+        title
+        url
+        date
+        image
+        summary
+      }
+    }
+  `;
+
+  const variables = {
+    startDate,
+    endDate,
+  };
+
+  const data = await client.request(query, variables);
+  return data.headlines;
 };
 
-export const getSummary = async (item) => {
-  const response = await axios.get("http://localhost:3001/api/summarize", {
-    params: {
-      url: item.url,
-      title: item.title
-    },
-  });
+export const getSummary = async (title, url) => {
+  const client = new GraphQLClient(endpoint);
 
-  return response.data;
+  const query = `
+    query GetSummary($title: String, $url: String) {
+      summary(title: $title, url: $url) {
+        _id
+        title
+        url
+        date
+        image
+        summary
+      }
+    }
+  `;
+
+  const variables = {
+    title,
+    url,
+  };
+  const data = await client.request(query, variables);
+  return data.summary;
 };

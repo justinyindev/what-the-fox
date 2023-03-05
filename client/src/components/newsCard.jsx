@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../static/css/newsCard.css";
 import TldrBox from "./tldrBox";
 
@@ -15,10 +15,26 @@ const separateHeading = (heading) => {
 
 const NewsCard = ({ item }) => {
   const { firstThree, restOfWords } = separateHeading(item.title);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="newscard-main-card-container">
-      <div className="newscard-heading-container">
+    <div
+      className={
+        isOpen ? "newscard-main-card-container" : "newscard-main-card-container"
+      }
+    >
+      <span className="newscard-open-close" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? (
+          <i class="newscard-close"></i>
+        ) : (
+          <i class="newscard-open"></i>
+        )}
+      </span>
+      <div
+        className={
+          isOpen ? "newscard-heading-container" : "newscard-heading-container"
+        }
+      >
         <a href={item.url}>
           <h2 className="newscard-heading">
             <span className="newscard-heading-highlighted">{firstThree}</span>{" "}
@@ -26,16 +42,18 @@ const NewsCard = ({ item }) => {
           </h2>
         </a>
       </div>
-      <div className="newscard-image-text-container">
-        <div className="newscard-image-container">
-          <img
-            className="newscard-image fade-in"
-            src={`data:image/jpeg;base64,${item.image}`}
-            alt={item.title}
-          />
+      {isOpen ? (
+        <div className="newscard-image-text-container">
+          <div className="newscard-image-container">
+            <img
+              className="newscard-image fade-in"
+              src={`data:image/jpeg;base64,${item.image}`}
+              alt={item.title}
+            />
+          </div>
+          <TldrBox item={item} />
         </div>
-        <TldrBox item={item} />
-      </div>
+      ) : null}
     </div>
   );
 };

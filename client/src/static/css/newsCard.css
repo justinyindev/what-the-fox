@@ -18,6 +18,21 @@ body {
   animation: slide-in 1s forwards;
 }
 
+.newscard-open-close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 18px;
+  right: 18px;
+  width: 22px;
+  height: 22px;
+  padding: 8px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+}
+
 .newscard-heading-container {
   display: flex;
   align-items: flex-start;
@@ -42,6 +57,8 @@ body {
   display: flex;
   flex-direction: row;
   max-width: 100%;
+
+  animation: fade-in 0.75s forwards;
 }
 
 .newscard-image-container {
@@ -58,33 +75,52 @@ body {
   height: 100%;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.newscard-open,
+.newscard-open::after {
+  display: block;
+  box-sizing: border-box;
+  background: currentColor;
+  border-radius: 10px;
 }
 
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.newscard-open {
+  margin-top: -2px;
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 2px;
 }
 
-@keyframes slide-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
+.newscard-open::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  top: -7px;
+  left: 7px;
+
+  animation: spin180 1s forwards;
+}
+
+.newscard-close {
+  display: block;
+  box-sizing: border-box;
+  background: currentColor;
+  border-radius: 10px;
+  margin-top: -2px;
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 2px;
+
+  animation: spin180 1s forwards;
+}
+
+@keyframes spin180 {
+  0% {
+    transform: rotate(0);
   }
-  to {
-    opacity: 0;
-    transform: translateX(100%);
+  100% {
+    transform: rotate(-180deg);
   }
 }

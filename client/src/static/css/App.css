@@ -11,17 +11,24 @@ body {
     Arial, sans-serif;
 }
 
-.banner{
+.navbar {
   width: 100vw;
   height: 100px;
+  position: fixed;
+  z-index: 100;
   background-color: #4c4e4d;
 }
 
+.calendar {
+  position: fixed;
+  top: 25%;
+}
+
 .banner-logo {
+  position: fixed;
   top: 2%;
   left: 2%;
   z-index: 999;
-  position: fixed;
   display: flex;
   width: 122px;
   height: 156px;

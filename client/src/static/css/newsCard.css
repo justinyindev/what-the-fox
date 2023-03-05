@@ -6,6 +6,8 @@ body {
 }
 
 .newscard-main-card-container {
+  position: relative;
+  top: 100px;
   background-color: #f3f4f5;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -14,10 +16,6 @@ body {
   height: auto;
 
   animation: slide-in 1s forwards;
-}
-
-.newscard-main-card-container > * {
-  animation: slide-in 1.5s forwards;
 }
 
 .newscard-heading-container {

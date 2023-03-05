@@ -45,17 +45,18 @@ const TldrBox = ({ item }) => {
       {!showTldr ? (
         <div className="tldr-text-container">
           <Typewriter
+            className="tldr-type-writer"
             onInit={(typewriter) => {
               typewriter
-                .pauseFor(2500)
-                .typeString("A simple yet powerful native javascript")
+                .pauseFor(1500)
+                .typeString("Click the tldr")
                 .pauseFor(300)
-                .deleteChars(10)
+                .deleteChars(4)
                 .typeString(
-                  "<strong>JS</strong> plugin for a cool typewriter effect and "
+                  "<strong>TL;DR</strong>"
                 )
                 .typeString(
-                  '<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>'
+                  ' button to get a <span style="color: #27ae60;">short summary</span> of the article'
                 )
                 .pauseFor(1000)
                 .start();

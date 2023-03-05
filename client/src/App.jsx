@@ -8,8 +8,10 @@ function App() {
   return (
     <div>
       <img className="banner-logo" src={logo} alt="logo" />
-      <div className="banner"></div>
-      <Calendar />
+      <div className="navbar"></div>
+      <div className="calendar">
+        <Calendar />
+      </div>
       <HomePage />
     </div>
   );

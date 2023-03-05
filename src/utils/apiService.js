@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-const endpoint = "http://localhost:3001/graphql";
+const endpoint = `${process.env.REACT_APP_API}/graphql`;
 
 export const getHeadlines = async (startDate, endDate) => {
   const client = new GraphQLClient(endpoint);

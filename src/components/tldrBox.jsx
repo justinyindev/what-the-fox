@@ -26,7 +26,7 @@ const TldrBox = ({ item }) => {
     if (item.url) {
       await fetchSummary(item);
     } else {
-      console.log("Invalid URL");
+      console.error("Invalid URL");
     }
   };
 

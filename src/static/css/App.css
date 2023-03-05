@@ -33,14 +33,19 @@ body {
 
 .calendar {
   position: fixed;
-  top: 25%;
+  width: 100%;
+  top: 100px;
+  overflow-x: scroll;
+  z-index: 999;
+  background-color: #fafafa;
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .banner-logo {
   position: fixed;
   top: 2%;
   left: 2%;
-  z-index: 999;
+  z-index: 9999;
   display: flex;
   width: 122px;
   height: 156px;
@@ -49,7 +54,7 @@ body {
 }
 
 @media (max-width: 800px) {
-  .homepage-banner-logo {
+  .banner-logo {
     animation: fade-out 0.2s forwards;
   }
 }

@@ -13,7 +13,6 @@ function App() {
     const fetchHeadlines = async () => {
       try {
         const response = await getHeadlines();
-        console.log(response[0].title);
         const headline = response[0].title;
         setCurrentHeadline(headline);
       } catch (error) {

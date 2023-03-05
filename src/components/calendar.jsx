@@ -44,7 +44,7 @@ const Calendar = () => {
       {loading ? null : (
         <div className="calendar-container">
           <div className="calendar-item-container">
-            <span className="calendar-picker-heading">Start Time</span>
+            <span className="calendar-picker-heading">Start</span>
             <DatePicker
               className="calendar-picker"
               selected={startDate}
@@ -52,7 +52,7 @@ const Calendar = () => {
             />
           </div>
           <div className="calendar-item-container">
-            <span className="calendar-picker-heading">End Time</span>
+            <span className="calendar-picker-heading">End</span>
             <DatePicker
               className="calendar-picker"
               selected={endDate}

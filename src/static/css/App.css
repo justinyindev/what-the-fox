@@ -25,6 +25,7 @@ body {
 
 .banner-marquee{
   width: 75% !important;
+  animation: fade-in 0.75s forwards;
 }
 
 .banner-marquee-headline{

@@ -1,44 +1,17 @@
 import React, { useState } from "react";
-import { getSummary } from "../utils/apiService";
 import Typewriter from "typewriter-effect";
 import "./../static/css/tldrBox.css";
 
 const TldrBox = ({ item }) => {
-  const [summary, setSummary] = useState("");
   const [showTldr, setShowTldr] = useState(false);
-  const [summaryLoading, setLoadingSummary] = useState(false);
-
-  const fetchSummary = async (item) => {
-    try {
-      setLoadingSummary(true);
-
-      const response = await getSummary(item.title, item.url);
-      const summary = response.summary;
-
-      setSummary(summary);
-      setLoadingSummary(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleClick = async (item) => {
-    if (!summary) {
-      await fetchSummary(item);
-    } else {
-      console.log("already fetched news!");
-    }
-  };
 
   return (
     <div className="tldr-container">
       <button
         className="tldr-button"
         onClick={() => {
-          handleClick(item);
-          setShowTldr(true);
+          setShowTldr(!showTldr);
         }}
-        disabled={summaryLoading}
       >
         TL;DR
       </button>
@@ -61,18 +34,8 @@ const TldrBox = ({ item }) => {
             }}
           />
         </div>
-      ) : summaryLoading ? (
-        <div className="tldr-text-container">
-          <Typewriter
-            options={{
-              strings: ["Scraping article", "summarizing..."],
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </div>
       ) : (
-        summary && <p className="tldr-text">{summary}</p>
+        item.summary && <p className="tldr-text">{item.summary}</p>
       )}
     </div>
   );

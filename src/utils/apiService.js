@@ -30,27 +30,3 @@ export const getHeadlines = async (startDate, endDate) => {
   const data = await client.request(query, variables);
   return data.headlines;
 };
-
-export const getSummary = async (title, url) => {
-  const client = new GraphQLClient(endpoint);
-
-  const query = `
-    query GetSummary($title: String, $url: String) {
-      summary(title: $title, url: $url) {
-        _id
-        title
-        url
-        date
-        image
-        summary
-      }
-    }
-  `;
-
-  const variables = {
-    title,
-    url,
-  };
-  const data = await client.request(query, variables);
-  return data.summary;
-};

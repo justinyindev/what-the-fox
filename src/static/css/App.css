@@ -41,6 +41,7 @@ body {
 }
 
 .banner-logo {
+  border: 1px transparent;
   position: fixed;
   top: 3%;
   left: 2%;

@@ -26,7 +26,7 @@ const TldrBox = ({ item }) => {
     if (!summary) {
       await fetchSummary(item);
     } else {
-      setShowTldr(!showTldr);
+      console.log("already fetched news!");
     }
   };
 
@@ -36,6 +36,7 @@ const TldrBox = ({ item }) => {
         className="tldr-button"
         onClick={() => {
           handleClick(item);
+          setShowTldr(true);
         }}
         disabled={summaryLoading}
       >

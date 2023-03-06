@@ -35,7 +35,6 @@ body {
   position: fixed;
   width: 100%;
   top: 100px;
-  overflow-x: scroll;
   z-index: 999;
   background-color: #fafafa;
   box-shadow: 0px 0 10px rgba(0, 0, 0, 0.2);
@@ -43,7 +42,7 @@ body {
 
 .banner-logo {
   position: fixed;
-  top: 2%;
+  top: 3%;
   left: 2%;
   z-index: 9999;
   display: flex;

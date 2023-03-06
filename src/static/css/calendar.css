@@ -57,27 +57,48 @@ body {
   max-width: 150px;
 }
 
-.react-datepicker__day {
-  background-color: burlywood;
+.react-datepicker__day-name {
+  color: #ffffff;
+}
+
+.react-datepicker__triangle::after {
+  border-bottom-color: #4c4e4d !important;
+}
+
+.react-datepicker__day{
+  color: #ffffff;
 }
 
 .react-datepicker__day--selected {
-  background-color: indianred;
+  background-color: #fff200;
+  color: #4c4e4d;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day:hover {
+  background-color: #ffffff;
+  color: #4c4e4d;
 }
 
 .react-datepicker__current-month {
-  background-color: yellow;
+  color: #ffffff;
 }
 
 .react-datepicker__header {
-  background-color: blue;
+  background-color: #4c4e4d;
+  color: #ffffff;
+  border: none;
 }
 
 .react-datepicker__month-container {
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
     Arial, sans-serif;
   font-weight: 600;
-  background-color: red;
+  background-color: #4c4e4d;
+}
+
+.react-datepicker{
+  border: none;
 }
 
 .calendar-button {

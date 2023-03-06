@@ -18,23 +18,15 @@ const NewsCard = ({ item }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div
-      className={
-        isOpen ? "newscard-main-card-container" : "newscard-main-card-container"
-      }
-    >
+    <div className="newscard-main-card-container">
       <span className="newscard-open-close" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? (
-          <i class="newscard-close"></i>
+          <i className="newscard-close"></i>
         ) : (
-          <i class="newscard-open"></i>
+          <i className="newscard-open"></i>
         )}
       </span>
-      <div
-        className={
-          isOpen ? "newscard-heading-container" : "newscard-heading-container"
-        }
-      >
+      <div className="newscard-heading-container">
         <a href={item.url}>
           <h2 className="newscard-heading">
             <span className="newscard-heading-highlighted">{firstThree}</span>{" "}

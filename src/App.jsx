@@ -29,7 +29,7 @@ function App() {
       <div className="banner">
         <Marquee
           className="banner-marquee"
-          speed={75}
+          speed={25}
           gradient={false}
           pauseOnHover={true}
         >

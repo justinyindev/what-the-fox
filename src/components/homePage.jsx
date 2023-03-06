@@ -16,7 +16,9 @@ const HomePage = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const response = await getHeadlines();
+        const startDate = new Date().setHours(0, 0, 0, 0);
+        const endDate = new Date().setHours(23, 59, 59, 999);
+        const response = await getHeadlines(startDate, endDate);
 
         dispatch(setHeadlines(response));
         dispatch(setIsLoading(false));

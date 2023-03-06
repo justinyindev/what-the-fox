@@ -22,11 +22,11 @@ const TldrBox = ({ item }) => {
     }
   };
 
-  const handleSummarize = async (item) => {
-    if (item.url) {
+  const handleClick = async (item) => {
+    if (!summary) {
       await fetchSummary(item);
     } else {
-      console.error("Invalid URL");
+      setShowTldr(!showTldr);
     }
   };
 
@@ -35,8 +35,7 @@ const TldrBox = ({ item }) => {
       <button
         className="tldr-button"
         onClick={() => {
-          handleSummarize(item);
-          setShowTldr(true);
+          handleClick(item);
         }}
         disabled={summaryLoading}
       >
@@ -52,9 +51,7 @@ const TldrBox = ({ item }) => {
                 .typeString("Click the tldr")
                 .pauseFor(300)
                 .deleteChars(4)
-                .typeString(
-                  "<strong>TL;DR</strong>"
-                )
+                .typeString("<strong>TL;DR</strong>")
                 .typeString(
                   ' button to get a <span style="color: #27ae60;">short summary</span> of the article'
                 )

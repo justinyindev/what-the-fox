@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHeadlines } from "../utils/apiService";
 import LoadingPage from "./loadingPage";
 import NewsCard from "./newsCard";
-import Typewriter from "typewriter-effect";
 import "./../static/css/homePage.css";
 
 const HomePage = () => {

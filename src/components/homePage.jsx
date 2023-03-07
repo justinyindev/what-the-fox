@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHeadlines } from "../utils/apiService";
 import LoadingPage from "./loadingPage";
 import NewsCard from "./newsCard";
+import Typewriter from "typewriter-effect";
 import "./../static/css/homePage.css";
 
 const HomePage = () => {
@@ -16,9 +17,8 @@ const HomePage = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const startDate = new Date().setHours(0, 0, 0, 0);
-        const endDate = new Date().setHours(23, 59, 59, 999);
-        const response = await getHeadlines(startDate, endDate);
+
+        const response = await getHeadlines();
 
         dispatch(setHeadlines(response));
         dispatch(setIsLoading(false));

@@ -16,36 +16,45 @@ const HomePage = () => {
   const [scrollPos, setScrollPos] = useState(0);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        // dispatch(setIsLoading(true));
+  const fetchHeadlines = async () => {
+    try {
+      const response = await getHeadlines(null, null, page, PAGE_LIMIT);
 
-        const response = await getHeadlines(null, null, page, PAGE_LIMIT);
-
+      if (page === 1) {
+        dispatch(setHeadlines(response.headlines));
+      } else {
         dispatch(appendHeadlines(response.headlines));
-        // dispatch(setIsLoading(false));
-
-        setScrollPos(window.scrollY);
-      } catch (error) {
-        console.error(error);
       }
-    };
+
+      setScrollPos(window.scrollY);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(setIsLoading(true));
     fetchHeadlines();
+    dispatch(setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
+      // If within 5px of the bottom of the page
       if (scrollTop + clientHeight >= scrollHeight - 5) {
         setPage(page + 1);
       }
     };
+    if (page > 1) {
+      fetchHeadlines();
+    }
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   useEffect(() => {

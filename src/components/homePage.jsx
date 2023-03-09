@@ -13,12 +13,15 @@ const HomePage = () => {
   const { headlines } = useSelector((state) => state.headlines);
   const { loading } = useSelector((state) => state.loading);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState();
   const [scrollPos, setScrollPos] = useState(0);
   const dispatch = useDispatch();
 
   const fetchHeadlines = async () => {
     try {
+      dispatch(setIsLoading(true));
       const response = await getHeadlines(null, null, page, PAGE_LIMIT);
+      setTotalPages(response.pageInfo.totalPages);
 
       if (page === 1) {
         dispatch(setHeadlines(response.headlines));
@@ -27,35 +30,30 @@ const HomePage = () => {
       }
 
       setScrollPos(window.scrollY);
+      dispatch(setIsLoading(false));
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    dispatch(setIsLoading(true));
-    fetchHeadlines();
-    dispatch(setIsLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-      // If within 5px of the bottom of the page
-      if (scrollTop + clientHeight >= scrollHeight - 5) {
+  const handleScroll = () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    // If within 2px of the bottom of the page
+    if (scrollTop + clientHeight >= scrollHeight) {
+      console.log(totalPages)
+      if (page + 1 <= totalPages) {
         setPage(page + 1);
       }
-    };
-    if (page > 1) {
-      fetchHeadlines();
     }
+  };
+
+  useEffect(() => {
+    fetchHeadlines();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, totalPages]);
 
   useEffect(() => {
     window.scrollTo(0, scrollPos);
@@ -63,14 +61,11 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        headlines &&
+      {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;
-        })
-      )}
+        })}
+      {loading ? <LoadingPage /> : null}
     </div>
   );
 };

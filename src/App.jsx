@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./static/css/App.css";
 import HomePage from "./components/homePage";
-import Calendar from "./components/calendar";
 import logo from "./static/images/wtv2.png";
 import Marquee from "react-fast-marquee";
-import { getHeadlines } from "./utils/apiService";
+import { useSelector } from "react-redux";
 
 function App() {
   const [currentHeadline, setCurrentHeadline] = useState("");
+  const { headlines } = useSelector((state) => state.headlines);
 
   useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        const response = await getHeadlines();
-        const headline = response[0].title;
-        setCurrentHeadline(headline);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchHeadlines();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (headlines.length > 0) {
+      setCurrentHeadline(headlines[0].title);
+    }
+  }, [headlines]);
 
   return (
     <div>
@@ -36,9 +28,9 @@ function App() {
           <h1 className="banner-marquee-headline">{currentHeadline}</h1>
         </Marquee>
       </div>
-      <div className="calendar">
+      {/* <div className="calendar">
         <Calendar />
-      </div>
+      </div> */}
       <HomePage />
     </div>
   );

@@ -54,7 +54,7 @@ body {
   animation: fade-in 1s forwards;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .banner-logo {
     animation: fade-out 0.2s forwards;
   }

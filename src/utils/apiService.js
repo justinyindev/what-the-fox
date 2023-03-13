@@ -32,9 +32,51 @@ export const getHeadlines = async (startDate, endDate, page, limit) => {
     startDate,
     endDate,
     page,
-    limit
+    limit,
   };
 
   const data = await client.request(query, variables);
   return data.headlines;
+};
+
+export const login = async (username, password) => {
+  const client = new GraphQLClient(endpoint);
+  const mutation = `
+    mutation Login($username: String!, $password: String!){
+      login(username: $username, password: $password){
+        userId
+        token
+        tokenExpiration
+      }
+    }`
+  
+  const variables = {
+    username,
+    password
+  }
+
+  const data = await client.request(mutation, variables);
+
+  return data.login;
+};
+
+export const createUser = async (userInput) => {
+  const client = new GraphQLClient(endpoint);
+  const mutation = `
+    mutation CreateUser($userInput: UserInput){
+      createUser(userInput: $userInput){
+        user_id
+        username
+        liked_articles
+      }
+    }
+  `;
+
+  const variables = {
+    userInput
+  };
+
+  const data = await client.request(mutation, variables);
+
+  return data.createUser;
 };

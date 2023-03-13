@@ -15,8 +15,8 @@ const TldrBox = ({ item }) => {
       >
         TL;DR
       </button>
-      {!showTldr ? (
-        <div className="tldr-text-container">
+      <div className="tldr-text-container">
+        {!showTldr ? (
           <Typewriter
             className="tldr-type-writer"
             onInit={(typewriter) => {
@@ -33,10 +33,10 @@ const TldrBox = ({ item }) => {
                 .start();
             }}
           />
-        </div>
-      ) : (
-        item.summary && <p className="tldr-text">{item.summary}</p>
-      )}
+        ) : (
+          item.summary && <p className="tldr-text">{item.summary}</p>
+        )}
+      </div>
     </div>
   );
 };

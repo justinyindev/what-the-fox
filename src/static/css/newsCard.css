@@ -7,10 +7,9 @@ body {
 
 .newscard-main-card-container {
   position: relative;
-  top: 165px;
+  top: 100px;
   background-color: #f3f4f5;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin: 12px;
   padding: 16px;
   width: 65%;
   height: auto;
@@ -60,6 +59,7 @@ body {
 .newscard-image-text-container {
   display: flex;
   flex-direction: row;
+  padding: 8px;
   max-width: 100%;
 
   animation: fade-in 0.75s forwards;

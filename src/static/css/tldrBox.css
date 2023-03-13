@@ -1,15 +1,16 @@
 .tldr-container {
   flex: 1;
   width: 50%;
-  height: 100%;
+  max-height: 100%;
   padding-right: 24px;
 }
 
-.tldr-type-writer{
+.tldr-type-writer {
   max-width: 100%;
 }
 
-.tldr-text-container{
+.tldr-text-container {
+  max-height: 100%;
   max-width: 100%;
   margin-top: 8px;
 }
@@ -77,8 +78,8 @@
   color: #ffffff;
 }
 
-@media (max-width: 800px){
-  .tldr-container{
+@media (max-width: 800px) {
+  .tldr-container {
     width: 100%;
     padding: 0;
     font-size: 12px;

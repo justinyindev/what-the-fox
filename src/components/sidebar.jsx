@@ -1,34 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogin } from "../redux/loginSlice";
+import { setCreateUser, setLogin } from "../redux/formSlice";
 import "../static/css/sidebar.css";
 import Item from "./item";
-import Login from "./login";
-import ModalShield from "./modalShield";
 
 const Sidebar = () => {
-  const { loginOpen } = useSelector((state) => state.login);
+  const { loginOpen, createUserOpen } = useSelector((state) => state.form);
   const dispatch = useDispatch();
-  const loginRef = useRef(null);
   const refresh = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (loginRef.current && !loginRef.current.contains(event.target)) {
-        dispatch(setLogin(false));
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dispatch]);
-
   const handleLoginClick = () => {
     dispatch(setLogin(!loginOpen));
+  };
+
+  const handleCreateUserClick = () => {
+    dispatch(setCreateUser(!createUserOpen));
   };
 
   return (
@@ -38,18 +26,11 @@ const Sidebar = () => {
           <Item heading={"Home"} onClick={refresh} />
           <Item heading={"Favourites"} />
         </li>
-        <div className="sidebar-footer">
+        <li className="sidebar-list footer">
           <Item heading={"Login"} onClick={handleLoginClick} />
-        </div>
+          <Item heading={"Create Account"} onClick={handleCreateUserClick} />
+        </li>
       </div>
-      {loginOpen && (
-        <>
-          <ModalShield />
-          <div ref={loginRef}>
-            <Login />
-          </div>
-        </>
-      )}
     </div>
   );
 };

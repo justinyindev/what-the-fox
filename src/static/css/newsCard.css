@@ -59,6 +59,7 @@ body {
 .newscard-image-text-container {
   display: flex;
   flex-direction: row;
+  padding: 8px;
   max-width: 100%;
 
   animation: fade-in 0.75s forwards;

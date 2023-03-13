@@ -1,4 +1,4 @@
-.login-container {
+.form-container {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -10,25 +10,17 @@
   z-index: 10000;
 }
 
-.login-heading-container {
-  margin: 8px;
+.form-heading {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
-}
-
-.login-heading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 25px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  margin: 4px;
-  margin-top: 8px;
+  justify-content: flex-start;
+  color: #4c4d4e;
   padding: 8px;
+  width: 250px;
+  height: 25px;
+  margin-top: 8px;
+  margin-left: 10px;
 }
 
 .active{
@@ -36,13 +28,7 @@
     color: #4c4e4d;
 }
 
-.login-heading:hover{
-    cursor: pointer;
-    background-color: #696c6b;
-    color: #ffffff;
-}
-
-.login-userinput-container {
+.form-userinput-container {
   max-width: 100%;
   padding: 8px;
   display: flex;
@@ -51,7 +37,7 @@
   align-items: center;
 }
 
-.login-userinput {
+.form-userinput {
   padding: 8px;
   margin: 8px;
   width: 90%;
@@ -60,25 +46,21 @@
   border: none;
 }
 
-.login-submit{
+.form-submit{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    width: 100px;
-    height: 25px;
+    background-color: #4c4e4d;
+    color: #ffffff;
+    width: 90%;
+    height: 35px;
     border-radius: 8px;
     padding: 8px;
     margin-top: 14px;
-}
-
-.login-submit:hover{
     cursor: pointer;
-    background-color: #4c4e4d;
-    color: #ffffff;
 }
 
-.login-invalid{
+.form-prompt{
     height: 8px;
     font-size: 12px;
     font-weight: 400;

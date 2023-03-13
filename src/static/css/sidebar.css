@@ -15,16 +15,13 @@
 .sidebar-list {
   display: flex;
   flex-direction: column;
-  padding: 8px;
 }
 
-.sidebar-footer {
-  display: flex;
+.footer {
+  padding-top: 12px;
   position: absolute;
-  padding-top: 15px;
-  bottom: 0;
+  bottom: 5px;
   width: 100%;
-  height: 15%;
   border-top: solid 1px #ffffff;
 }
 
@@ -41,7 +38,7 @@
   margin: 4px;
 }
 
-.sidebar-item:disabled{
+.sidebar-item:disabled {
   background-color: #424344;
 }
 

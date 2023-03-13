@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormLoading } from "../redux/loadingSlice";
 import "../static/css/form.css";
 
 const Form = ({ apiService, heading }) => {
+  const dispatch = useDispatch();
+  const { formLoading } = useSelector((state) => state.loading);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -11,11 +15,14 @@ const Form = ({ apiService, heading }) => {
   const handleSubmit = () => {
     if (!username || !password) {
       setError(true);
+      return;
     }
-    setUserinput({
-      username: username,
-      password: password,
-    });
+    if (!formLoading) {
+      setUserinput({
+        username: username,
+        password: password,
+      });
+    }
   };
 
   const handleUsername = (event) => {
@@ -38,16 +45,18 @@ const Form = ({ apiService, heading }) => {
     }
 
     const fetchData = async () => {
+      dispatch(setFormLoading(true));
       const response = await apiService(userinput);
       if (response) {
         setSuccess(true);
       } else {
         setError(true);
       }
+      dispatch(setFormLoading(false));
     };
 
     fetchData();
-  }, [userinput, apiService]);
+  }, [userinput, apiService, dispatch]);
 
   return (
     <>
@@ -68,11 +77,15 @@ const Form = ({ apiService, heading }) => {
             onKeyDown={handleKeyDown}
           ></input>
           <h2 className="form-prompt">
-            {error ? "invalid credentials / account already exists" : success ? "success" : ""}
+            {error
+              ? "invalid credentials / account already exists"
+              : success
+              ? "success"
+              : ""}
           </h2>
-          <span className="form-submit" onClick={handleSubmit}>
-            {heading}
-          </span>
+          <button className="form-submit" onClick={handleSubmit}>
+            {formLoading ? "Loading" : heading}
+          </button>
         </div>
       </div>
     </>

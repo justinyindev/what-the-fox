@@ -23,9 +23,9 @@
   margin-left: 10px;
 }
 
-.active{
-    background-color: #fff200;
-    color: #4c4e4d;
+.active {
+  background-color: #fff200;
+  color: #4c4e4d;
 }
 
 .form-userinput-container {
@@ -40,29 +40,30 @@
 .form-userinput {
   padding: 8px;
   margin: 8px;
-  width: 90%;
+  width: 95%;
   border-radius: 8px;
   height: 35px;
   border: none;
 }
 
-.form-submit{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #4c4e4d;
-    color: #ffffff;
-    width: 90%;
-    height: 35px;
-    border-radius: 8px;
-    padding: 8px;
-    margin-top: 14px;
-    cursor: pointer;
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4c4e4d;
+  color: #ffffff;
+  width: 100%;
+  height: 45px;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 14px;
+  border: none;
+  cursor: pointer;
 }
 
-.form-prompt{
-    height: 8px;
-    font-size: 12px;
-    font-weight: 400;
-    color: #4c4e4d;
+.form-prompt {
+  height: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #4c4e4d;
 }

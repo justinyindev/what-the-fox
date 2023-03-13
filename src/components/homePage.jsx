@@ -41,13 +41,7 @@ const HomePage = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
 
-      if (scrollTop <= 0) {
-        console.log("fetching new headlines");
-        fetchHeadlines();
-      }
-
-      // If within 2px of the bottom of the page
-      if (scrollTop + clientHeight >= scrollHeight) {
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
         console.log(totalPages);
         if (page + 1 <= totalPages) {
           setPage(page + 1);
@@ -66,12 +60,11 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      {/* {document.documentElement.scrollTop <= 0 && loading && (<Loading/>) } */}
       {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;
         })}
-      {loading && document.documentElement.scrollTop > 0 && <LoadingPage />}
+      {loading && <LoadingPage />}
     </div>
   );
 };

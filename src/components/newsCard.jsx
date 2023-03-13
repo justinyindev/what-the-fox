@@ -21,9 +21,9 @@ const NewsCard = ({ item }) => {
     <div className="newscard-main-card-container">
       <span className="newscard-open-close" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? (
-          <i className="newscard-close"></i>
+          <i className="newscard-minus"></i>
         ) : (
-          <i className="newscard-open"></i>
+          <i className="newscard-plus"></i>
         )}
       </span>
       <div className="newscard-heading-container">

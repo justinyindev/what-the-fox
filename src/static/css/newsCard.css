@@ -33,6 +33,10 @@ body {
   border-radius: 100px;
 }
 
+.newscard-open-close:hover{
+  background-color: #b9b9b9;
+}
+
 .newscard-heading-container {
   display: flex;
   align-items: flex-start;
@@ -75,23 +79,22 @@ body {
   height: 100%;
 }
 
-.newscard-open,
-.newscard-open::after {
+.newscard-plus,
+.newscard-plus::after {
   display: block;
   box-sizing: border-box;
   background: currentColor;
   border-radius: 10px;
 }
 
-.newscard-open {
+.newscard-plus {
   margin-top: -2px;
   position: relative;
-  transform: scale(var(--ggs, 1));
-  width: 16px;
+  width: 12px;
   height: 2px;
 }
 
-.newscard-open::after {
+.newscard-plus::after {
   content: "";
   position: absolute;
   width: 2px;
@@ -99,21 +102,20 @@ body {
   top: -5px;
   left: 5px;
 
-  animation: spin180 1s forwards;
+  animation: spin 1s forwards;
 }
 
-.newscard-close {
+.newscard-minus {
   display: block;
   box-sizing: border-box;
   background: currentColor;
   border-radius: 10px;
   margin-top: -2px;
   position: relative;
-  transform: scale(var(--ggs, 1));
-  width: 16px;
+  width: 12px;
   height: 2px;
 
-  animation: spin180 1s forwards;
+  animation: spin 1s forwards;
 }
 
 @media (max-width: 800px) {
@@ -136,11 +138,14 @@ body {
   }
 }
 
-@keyframes spin180 {
+@keyframes spin {
   0% {
     transform: rotate(0);
   }
+  50% {
+    transform: rotate(360deg);
+  }
   100% {
-    transform: rotate(-180deg);
+    transform: rotate(360deg);
   }
 }

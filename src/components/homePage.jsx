@@ -12,6 +12,7 @@ const PAGE_LIMIT = 5;
 const HomePage = () => {
   const { headlines } = useSelector((state) => state.headlines);
   const { loading } = useSelector((state) => state.loading);
+  const { loginOpen } = useSelector((state) => state.login);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const [scrollPos, setScrollPos] = useState(0);
@@ -59,7 +60,12 @@ const HomePage = () => {
   }, [scrollPos]);
 
   return (
-    <div className="homepage-container">
+    <div
+      className="homepage-container"
+      style={{
+        zIndex: loginOpen ? -1 : 100,
+      }}
+    >
       {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;

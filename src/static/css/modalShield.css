@@ -1,0 +1,9 @@
+.modal-shield {
+    position: fixed;
+    background-color: rgba(52, 52, 52, 0.8);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 9999;
+  }

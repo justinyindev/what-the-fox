@@ -29,10 +29,11 @@
 }
 
 .sidebar-item {
+  border: none;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 15px;
+  height: 25px;
   border-radius: 8px;
   background-color: #4c4d4e;
   color: #ffffff;
@@ -40,6 +41,12 @@
   margin: 4px;
 }
 
+.sidebar-item:disabled{
+  background-color: #424344;
+}
+
 .sidebar-item:hover {
-  transform: scale(120%);
+  cursor: pointer;
+  background-color: #f0f0f1;
+  color: #4c4d4e;
 }

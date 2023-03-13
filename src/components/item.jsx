@@ -1,8 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "../static/css/sidebar.css";
 
 const Item = ({ heading, onClick }) => {
-  return <span className="sidebar-item" onClick={onClick}>{heading}</span>;
+  const { loading } = useSelector((state) => state.loading);
+  return (
+    <button className="sidebar-item" onClick={onClick} disabled={loading}>
+      {heading}
+    </button>
+  );
 };
 
 export default Item;

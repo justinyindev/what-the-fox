@@ -7,10 +7,9 @@ body {
 
 .newscard-main-card-container {
   position: relative;
-  top: 125px;
+  top: 100px;
   background-color: #f3f4f5;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin: 12px;
   padding: 16px;
   width: 65%;
   height: auto;

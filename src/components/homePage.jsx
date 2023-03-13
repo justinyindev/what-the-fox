@@ -17,43 +17,48 @@ const HomePage = () => {
   const [scrollPos, setScrollPos] = useState(0);
   const dispatch = useDispatch();
 
-  const fetchHeadlines = async () => {
-    try {
-      dispatch(setIsLoading(true));
-      const response = await getHeadlines(null, null, page, PAGE_LIMIT);
-      setTotalPages(response.pageInfo.totalPages);
-
-      if (page === 1) {
-        dispatch(setHeadlines(response.headlines));
-      } else {
-        dispatch(appendHeadlines(response.headlines));
-      }
-
-      setScrollPos(window.scrollY);
-      dispatch(setIsLoading(false));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleScroll = () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    // If within 2px of the bottom of the page
-    if (scrollTop + clientHeight >= scrollHeight) {
-      console.log(totalPages)
-      if (page + 1 <= totalPages) {
-        setPage(page + 1);
-      }
-    }
-  };
-
   useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        dispatch(setIsLoading(true));
+        const response = await getHeadlines(null, null, page, PAGE_LIMIT);
+        setTotalPages(response.pageInfo.totalPages);
+
+        if (page === 1) {
+          dispatch(setHeadlines(response.headlines));
+        } else {
+          dispatch(appendHeadlines(response.headlines));
+        }
+
+        setScrollPos(window.scrollY);
+        dispatch(setIsLoading(false));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+
+      if (scrollTop <= 0) {
+        console.log("fetching new headlines");
+        fetchHeadlines();
+      }
+
+      // If within 2px of the bottom of the page
+      if (scrollTop + clientHeight >= scrollHeight) {
+        console.log(totalPages);
+        if (page + 1 <= totalPages) {
+          setPage(page + 1);
+        }
+      }
+    };
     fetchHeadlines();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, totalPages]);
+  }, [page, totalPages, dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, scrollPos);
@@ -61,11 +66,12 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
+      {/* {document.documentElement.scrollTop <= 0 && loading && (<Loading/>) } */}
       {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;
         })}
-      {loading ? <LoadingPage /> : null}
+      {loading && document.documentElement.scrollTop > 0 && <LoadingPage />}
     </div>
   );
 };

@@ -28,9 +28,6 @@ function App() {
           <h1 className="banner-marquee-headline">{currentHeadline}</h1>
         </Marquee>
       </div>
-      {/* <div className="calendar">
-        <Calendar />
-      </div> */}
       <HomePage />
     </div>
   );

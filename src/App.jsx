@@ -4,6 +4,7 @@ import HomePage from "./components/homePage";
 import logo from "./static/images/wtv2.png";
 import Marquee from "react-fast-marquee";
 import { useSelector } from "react-redux";
+import Sidebar from "./components/sidebar";
 
 function App() {
   const [currentHeadline, setCurrentHeadline] = useState("");
@@ -17,8 +18,8 @@ function App() {
 
   return (
     <div>
-      <img className="banner-logo" src={logo} alt="logo" />
       <div className="banner">
+        <img className="banner-logo" src={logo} alt="logo" />
         <Marquee
           className="banner-marquee"
           speed={25}
@@ -28,7 +29,10 @@ function App() {
           <h1 className="banner-marquee-headline">{currentHeadline}</h1>
         </Marquee>
       </div>
-      <HomePage />
+      <div className="main-content">
+        <Sidebar />
+        <HomePage />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.login{
+    position: fixed;
+    background-color: red;
+    top: 0;
+    left: 0;
+    opacity: 50%;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 9999;
+}

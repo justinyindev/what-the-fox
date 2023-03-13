@@ -1,8 +1,11 @@
 .homepage-container {
+  position: relative;
   background-color: #ffffff;
+  left: 100px;
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
   min-height: 100%;
+  z-index: -1;
 }

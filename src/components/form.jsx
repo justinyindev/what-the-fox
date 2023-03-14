@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormLoading } from "../redux/loadingSlice";
+import Typewriter from "typewriter-effect";
 import "../static/css/form.css";
 
 const Form = ({ apiService, heading }) => {
@@ -84,7 +85,17 @@ const Form = ({ apiService, heading }) => {
               : ""}
           </h2>
           <button className="form-submit" onClick={handleSubmit}>
-            {formLoading ? "Loading" : heading}
+            {formLoading ? (
+              <Typewriter
+                options={{
+                  strings: ["..."],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            ) : (
+              heading
+            )}
           </button>
         </div>
       </div>

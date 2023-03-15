@@ -46,7 +46,9 @@ export const login = async (username, password) => {
       login(username: $username, password: $password){
         user_id
         token
-        tokenExpiration
+        tokenExpiration,
+        username,
+        bookmarks
       }
     }`;
 

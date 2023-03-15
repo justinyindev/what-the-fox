@@ -11,6 +11,10 @@ const Sidebar = () => {
     window.location.reload();
   };
 
+  const handleBookmarkClick = () => {
+    console.log("clicked")
+  }
+
   const handleLoginClick = () => {
     dispatch(setLogin(!loginOpen));
   };
@@ -24,7 +28,7 @@ const Sidebar = () => {
       <div className="sidebar-container">
         <li className="sidebar-list">
           <Item heading={"Home"} onClick={refresh} />
-          <Item heading={"Bookmarks"} />
+          <Item heading={"Bookmarks"} onClick={handleBookmarkClick} />
         </li>
         <li className="sidebar-list footer">
           <Item heading={"Login"} onClick={handleLoginClick} />

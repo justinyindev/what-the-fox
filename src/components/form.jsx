@@ -51,7 +51,7 @@ const Form = ({ apiService, heading }) => {
       const response = await apiService(userinput);
       if (response) {
         if (response.token) {
-          dispatch(setUserInfo(response))
+          dispatch(setUserInfo(response));
         }
         setSuccess(true);
       } else {

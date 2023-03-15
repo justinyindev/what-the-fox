@@ -19,7 +19,7 @@ function App() {
   const formRef = useRef(null);
 
   useEffect(() => {
-    console.log({userInfo})
+    console.log({ userInfo });
   }, [userInfo]);
 
   const apiServiceLogin = async (userinput) => {

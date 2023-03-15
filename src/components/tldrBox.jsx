@@ -27,7 +27,7 @@ const TldrBox = ({ item }) => {
                 .deleteChars(4)
                 .typeString("<strong>TL;DR</strong>")
                 .typeString(
-                  ' button to get a <span style="color: #27ae60;">short summary</span> of the article'
+                  ' button to get a <span style="color: #fff200;">short summary</span> of the article'
                 )
                 .pauseFor(1000)
                 .start();

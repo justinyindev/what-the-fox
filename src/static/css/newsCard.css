@@ -8,11 +8,12 @@ body {
 .newscard-main-card-container {
   position: relative;
   top: 100px;
-  background-color: #f3f4f5;
+  background-color: #3a3a3a;
   margin: 12px;
   padding: 16px;
   width: 65%;
   height: auto;
+  border-radius: 8px;
 
   animation: slide-in 1s forwards;
 }
@@ -45,7 +46,7 @@ body {
 
 .newscard-heading {
   text-decoration: none;
-  color: #4c4e4d;
+  color: #ffffff;
   font-size: 36px;
   font-weight: 700;
   line-height: 36px;
@@ -53,6 +54,7 @@ body {
 
 .newscard-heading-highlighted {
   padding: 1px 2px 1px 2px;
+  color: #2a2a2a;
   background-color: #fff200;
 }
 
@@ -116,6 +118,25 @@ body {
   height: 2px;
 
   animation: spin 1s forwards;
+}
+
+.newscard-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 10px;
+  width: 100%;
+  padding: 8px;
+}
+
+.newscard-like{
+  width: 24px;
+  height: 24px;
+}
+
+.newscard-like:hover svg path {
+  fill: #4c4e4d;
 }
 
 @media (max-width: 800px) {

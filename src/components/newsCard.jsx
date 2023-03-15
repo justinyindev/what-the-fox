@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { likeArticle } from "../utils/apiService";
 import "./../static/css/newsCard.css";
 import TldrBox from "./tldrBox";
 
@@ -16,6 +18,16 @@ const separateHeading = (heading) => {
 const NewsCard = ({ item }) => {
   const { firstThree, restOfWords } = separateHeading(item.title);
   const [isOpen, setIsOpen] = useState(true);
+  const { userInfo } = useSelector((state) => state.user);
+
+  const handleLikeArticle = async () => {
+    if (!userInfo) {
+      return;
+    }
+    
+    const response = await likeArticle(item.title, userInfo);
+    console.log(response);
+  };
 
   return (
     <div className="newscard-main-card-container">
@@ -46,6 +58,11 @@ const NewsCard = ({ item }) => {
           <TldrBox item={item} />
         </div>
       ) : null}
+      <div className="newscard-footer">
+        <span className="newscard-like" onClick={handleLikeArticle}>
+          Hello
+        </span>
+      </div>
     </div>
   );
 };

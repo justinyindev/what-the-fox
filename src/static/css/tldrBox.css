@@ -9,6 +9,10 @@
   max-width: 100%;
 }
 
+.Typewriter__wrapper{
+  color: #ffffff;
+}
+
 .tldr-text-container {
   max-height: 100%;
   max-width: 100%;
@@ -17,7 +21,7 @@
 
 .tldr-text {
   font-size: 13.5px;
-  color: #4c4e4d;
+  color: #ffffff;
   line-height: 18.9px;
   letter-spacing: 0.7px;
   word-spacing: 2px;

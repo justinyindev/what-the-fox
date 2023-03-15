@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormLoading } from "../redux/loadingSlice";
 import Typewriter from "typewriter-effect";
 import "../static/css/form.css";
+import { setUserInfo } from "../redux/userSlice";
 
 const Form = ({ apiService, heading }) => {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ const Form = ({ apiService, heading }) => {
       dispatch(setFormLoading(true));
       const response = await apiService(userinput);
       if (response) {
+        if (response.token) {
+          dispatch(setUserInfo(response))
+        }
         setSuccess(true);
       } else {
         setError(true);

@@ -44,16 +44,16 @@ export const login = async (username, password) => {
   const mutation = `
     mutation Login($username: String!, $password: String!){
       login(username: $username, password: $password){
-        userId
+        user_id
         token
         tokenExpiration
       }
-    }`
-  
+    }`;
+
   const variables = {
     username,
-    password
-  }
+    password,
+  };
 
   const data = await client.request(mutation, variables);
 
@@ -73,10 +73,32 @@ export const createUser = async (userInput) => {
   `;
 
   const variables = {
-    userInput
+    userInput,
   };
 
   const data = await client.request(mutation, variables);
 
   return data.createUser;
+};
+
+export const likeArticle = async (articleTitle, userInfo) => {
+  const client = new GraphQLClient(endpoint);
+
+  client.setHeader("Authorization", `Bearer ${userInfo.token}`);
+
+  const mutation = `mutation LikeArticle($articleTitle: String!){
+    likeArticle(articleTitle: $articleTitle){
+      user_id
+      username
+      liked_articles
+    }
+  }`;
+
+  const variables = {
+    articleTitle,
+  };
+
+  const data = await client.request(mutation, variables);
+
+  return data.likeArticle;
 };

@@ -14,18 +14,21 @@ function App() {
   const [currentHeadline, setCurrentHeadline] = useState("");
   const { headlines } = useSelector((state) => state.headlines);
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
+  const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const formRef = useRef(null);
+
+  useEffect(() => {
+    console.log({userInfo})
+  }, [userInfo]);
 
   const apiServiceLogin = async (userinput) => {
     try {
       const response = await login(userinput.username, userinput.password);
-      if (response.userId) {
+      if (response) {
         dispatch(setLogin(false));
-
-        return response;
       }
-      return null;
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -34,12 +37,10 @@ function App() {
   const apiServiceCreateUser = async (userInput) => {
     try {
       const response = await createUser(userInput);
-      if (response.user_id) {
+      if (response) {
         dispatch(setCreateUser(false));
-
-        return response;
       }
-      return null;
+      return response;
     } catch (error) {
       console.error(error);
     }

@@ -67,7 +67,7 @@ export const createUser = async (userInput) => {
       createUser(userInput: $userInput){
         user_id
         username
-        liked_articles
+        bookmarks
       }
     }
   `;
@@ -81,24 +81,24 @@ export const createUser = async (userInput) => {
   return data.createUser;
 };
 
-export const likeArticle = async (articleTitle, userInfo) => {
+export const bookmark = async (title, userInfo) => {
   const client = new GraphQLClient(endpoint);
 
   client.setHeader("Authorization", `Bearer ${userInfo.token}`);
 
-  const mutation = `mutation LikeArticle($articleTitle: String!){
-    likeArticle(articleTitle: $articleTitle){
+  const mutation = `mutation Bookmark($title: String!){
+    bookmark(title: $title){
       user_id
       username
-      liked_articles
+      bookmarks
     }
   }`;
 
   const variables = {
-    articleTitle,
+    title,
   };
 
   const data = await client.request(mutation, variables);
 
-  return data.likeArticle;
+  return data.bookmark;
 };

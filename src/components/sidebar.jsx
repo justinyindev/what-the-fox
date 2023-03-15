@@ -24,7 +24,7 @@ const Sidebar = () => {
       <div className="sidebar-container">
         <li className="sidebar-list">
           <Item heading={"Home"} onClick={refresh} />
-          <Item heading={"Favourites"} />
+          <Item heading={"Bookmarks"} />
         </li>
         <li className="sidebar-list footer">
           <Item heading={"Login"} onClick={handleLoginClick} />

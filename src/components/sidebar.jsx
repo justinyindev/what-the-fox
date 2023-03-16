@@ -4,20 +4,26 @@ import { setCreateUser, setLogin } from "../redux/formSlice";
 import { useNavigate } from "react-router-dom";
 import "../static/css/sidebar.css";
 import Item from "./item";
+import { setUserBookmarks } from "../redux/userSlice";
 
 const Sidebar = () => {
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleHomepage = () => {
+    dispatch(setUserBookmarks([]));
     navigate("/");
   };
 
   const handleBookmarkClick = () => {
-    // TODO
-    console.log("clicked");
+    if (!userInfo.token) {
+      dispatch(setLogin(true));
+      return;
+    }
+
+    dispatch(setUserBookmarks(userInfo.bookmarks));
   };
 
   const handleLoginClick = () => {

@@ -10,9 +10,9 @@ export const headlinesSlice = createSlice({
     appendHeadlines: (state, action) => {
       const newHeadlines = action.payload.filter((headline) => {
         return !state.headlines.some((h) => h.title === headline.title);
-      })
+      });
       state.headlines = [...state.headlines, ...newHeadlines];
-    }
+    },
   },
 });
 

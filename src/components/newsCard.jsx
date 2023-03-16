@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bookmark } from "../utils/apiService";
 import { svg } from "../static/svg";
+import { appendUserBookmarks } from "../redux/userSlice";
 import "./../static/css/newsCard.css";
 import TldrBox from "./tldrBox";
+import { setLogin } from "../redux/formSlice";
 
 const separateHeading = (heading) => {
   const splitString = heading.split(" ");
@@ -20,14 +22,15 @@ const NewsCard = ({ item }) => {
   const { firstThree, restOfWords } = separateHeading(item.title);
   const [isOpen, setIsOpen] = useState(true);
   const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleBookmark = async () => {
-    if (!userInfo) {
+    if (!userInfo.token) {
+      dispatch(setLogin(true));
       return;
     }
-
     const response = await bookmark(item.title, userInfo);
-    console.log(response);
+    dispatch(appendUserBookmarks(response.bookmarks));
   };
 
   return (

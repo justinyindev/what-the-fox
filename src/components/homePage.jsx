@@ -13,6 +13,7 @@ const PAGE_LIMIT = 12;
 const HomePage = () => {
   const { headlines } = useSelector((state) => state.headlines);
   const { loading } = useSelector((state) => state.loading);
+  const { userBookmarks } = useSelector((state) => state.user);
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
@@ -23,9 +24,14 @@ const HomePage = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const response = await getHeadlines(null, null, page, PAGE_LIMIT);
+        const response = await getHeadlines(
+          null,
+          null,
+          userBookmarks,
+          page,
+          PAGE_LIMIT
+        );
         setTotalPages(response.pageInfo.totalPages);
-
         if (page === 1) {
           dispatch(setHeadlines(response.headlines));
         } else {
@@ -53,7 +59,7 @@ const HomePage = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [page, totalPages, dispatch]);
+  }, [page, totalPages, userBookmarks, dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, scrollPos);

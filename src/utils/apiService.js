@@ -2,7 +2,7 @@ import { GraphQLClient } from "graphql-request";
 
 const endpoint = `${process.env.REACT_APP_API}/graphql`;
 
-export const getHeadlines = async (startDate, endDate, page, limit) => {
+export const getHeadlines = async (startDate, endDate, bookmarks, page, limit) => {
   const client = new GraphQLClient(endpoint);
   if (startDate && endDate) {
     startDate = new Date(startDate).toISOString();
@@ -10,8 +10,8 @@ export const getHeadlines = async (startDate, endDate, page, limit) => {
   }
 
   const query = `
-  query GetHeadlines($startDate: String, $endDate: String, $page: Int, $limit: Int) {
-    headlines(startDate: $startDate, endDate: $endDate, page: $page, limit: $limit) {
+  query GetHeadlines($startDate: String, $endDate: String, $bookmarks: [String], $page: Int, $limit: Int) {
+    headlines(startDate: $startDate, endDate: $endDate, bookmarks: $bookmarks, page: $page, limit: $limit) {
       headlines {
         _id
         title
@@ -31,6 +31,7 @@ export const getHeadlines = async (startDate, endDate, page, limit) => {
   const variables = {
     startDate,
     endDate,
+    bookmarks,
     page,
     limit,
   };

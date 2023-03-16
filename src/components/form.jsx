@@ -72,6 +72,7 @@ const Form = ({ apiService, heading }) => {
             handleKeyDown={handleKeyDown}
             svgType="Login"
             placeholder={"username"}
+            autoFocus={true}
           />
           <Input
             handleChange={handlePassword}

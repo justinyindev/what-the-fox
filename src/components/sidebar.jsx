@@ -6,17 +6,19 @@ import Item from "./item";
 
 const Sidebar = () => {
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
+  const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const refresh = () => {
     window.location.reload();
   };
 
   const handleBookmarkClick = () => {
-    console.log("clicked")
-  }
+    // TODO
+    console.log("clicked");
+  };
 
   const handleLoginClick = () => {
-    dispatch(setLogin(!loginOpen));
+    if (!userInfo.token) dispatch(setLogin(!loginOpen));
   };
 
   const handleCreateUserClick = () => {

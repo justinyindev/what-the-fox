@@ -15,7 +15,7 @@ body {
   height: auto;
   border-radius: 8px;
 
-  animation: slide-in 1s forwards;
+  animation: fade-in 1s forwards;
 }
 
 .newscard-open-close {
@@ -35,14 +35,19 @@ body {
 .newscard-open-close:hover {
   cursor: pointer;
   transform: translateY(-3px);
-  background-color: #2b2b2b;
 }
 
 .newscard-heading-container {
   display: flex;
-  align-items: flex-start;
-  max-width: 100%;
+  align-items: center;
+  max-width: 90%;
   padding: 16px 24px;
+  border-radius: 8px;
+}
+
+.newscard-heading-container:hover{
+  transform: translateY(-1px);
+  background-color: #2b2b2b;
 }
 
 .newscard-heading {
@@ -56,6 +61,7 @@ body {
 .newscard-heading-highlighted {
   padding: 1px 2px 1px 2px;
   color: #3a3a3a;
+  border-radius: 8px;
   background-color: #fff200;
 }
 

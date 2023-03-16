@@ -1,0 +1,25 @@
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.input-bar{
+    width: 100%;
+    height: 36px;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 4px;
+    border: 0.5px solid #ffffff;
+    color: #ffffff;
+    background-color: #3a3a3a;
+}
+
+.input-bar::placeholder{
+    color: #ffffff;
+}

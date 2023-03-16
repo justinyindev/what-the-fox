@@ -6,6 +6,7 @@ import { getHeadlines } from "../utils/apiService";
 import LoadingPage from "./loadingPage";
 import NewsCard from "./newsCard";
 import "./../static/css/homePage.css";
+import UserCard from "./userCard";
 
 const PAGE_LIMIT = 5;
 
@@ -43,7 +44,6 @@ const HomePage = () => {
         document.documentElement;
 
       if (scrollTop + clientHeight >= scrollHeight - 5) {
-        console.log(totalPages);
         if (page + 1 <= totalPages) {
           setPage(page + 1);
         }
@@ -63,9 +63,10 @@ const HomePage = () => {
     <div
       className="homepage-container"
       style={{
-        zIndex: (loginOpen || createUserOpen) ? -1 : 100,
+        zIndex: loginOpen || createUserOpen ? -1 : 100,
       }}
     >
+      <UserCard />
       {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./static/css/App.css";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/homePage";
 import logo from "./static/images/wtv2.png";
 import Marquee from "react-fast-marquee";
@@ -9,6 +9,7 @@ import Form from "./components/form";
 import ModalShield from "./components/modalShield";
 import { setCreateUser, setLogin } from "./redux/formSlice";
 import { createUser, login } from "./utils/apiService";
+import "./static/css/App.css";
 
 function App() {
   const [currentHeadline, setCurrentHeadline] = useState("");
@@ -67,7 +68,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <div className="banner">
         <img className="banner-logo" src={logo} alt="logo" />
         <Marquee
@@ -100,9 +101,11 @@ function App() {
           </>
         )}
         <Sidebar />
-        <HomePage />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
       </div>
-    </div>
+    </>
   );
 }
 

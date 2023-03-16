@@ -1,0 +1,64 @@
+.user-card-container {
+  position: absolute;
+  top: 125px;
+  right: 230px;
+  width: 230px;
+  border: 0.5px solid #f0f0f161;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  animation: fade-in 1s forwards;
+}
+
+.user-card-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.user-card-icon {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 100%;
+  border: 1px solid #ffffff;
+}
+
+.user-card-icon svg path {
+  fill: #ffffff;
+}
+
+.user-card-username-container {
+  background-color: #2a2a2a;
+  border: none;
+  border-radius: 8px;
+
+  color: #ffffff;
+  padding: 4px;
+}
+
+.user-card-username {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.user-card-username-container:disabled {
+  opacity: 35%;
+}
+
+.user-card-username:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1100px){
+    .user-card-container{
+        display: none;
+    }
+}

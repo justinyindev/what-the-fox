@@ -4,6 +4,7 @@ import { setFormLoading } from "../redux/loadingSlice";
 import Typewriter from "typewriter-effect";
 import "../static/css/form.css";
 import { setUserInfo } from "../redux/userSlice";
+import Input from "./input";
 
 const Form = ({ apiService, heading }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ const Form = ({ apiService, heading }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [userinput, setUserinput] = useState({});
 
   const handleSubmit = () => {
@@ -53,7 +53,6 @@ const Form = ({ apiService, heading }) => {
         if (response.token) {
           dispatch(setUserInfo(response));
         }
-        setSuccess(true);
       } else {
         setError(true);
       }
@@ -68,39 +67,36 @@ const Form = ({ apiService, heading }) => {
       <div className="form-container">
         <h1 className="form-heading">{heading}</h1>
         <div className="form-userinput-container">
-          <input
-            placeholder="username"
-            className="form-userinput"
-            onChange={handleUsername}
-            onKeyDown={handleKeyDown}
-          ></input>
-          <input
-            placeholder="password"
-            className="form-userinput"
-            type="password"
-            onChange={handlePassword}
-            onKeyDown={handleKeyDown}
-          ></input>
+          <Input
+            handleChange={handleUsername}
+            handleKeyDown={handleKeyDown}
+            svgType="Login"
+            placeholder={"username"}
+          />
+          <Input
+            handleChange={handlePassword}
+            handleKeyDown={handleKeyDown}
+            svgType="Login"
+            placeholder={"password"}
+          />
           <h2 className="form-prompt">
-            {error
-              ? "invalid credentials / account already exists"
-              : success
-              ? "success"
-              : ""}
+            {error && "invalid credentials / account already exists"}
           </h2>
-          <button className="form-submit" onClick={handleSubmit}>
-            {formLoading ? (
-              <Typewriter
-                options={{
-                  strings: ["..."],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            ) : (
-              heading
-            )}
-          </button>
+          <div className="form-submit-container">
+            <button className="form-submit" onClick={handleSubmit}>
+              {formLoading ? (
+                <Typewriter
+                  options={{
+                    strings: ["..."],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              ) : (
+                heading
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </>

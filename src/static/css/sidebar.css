@@ -58,3 +58,13 @@
   width: 24px;
   height: 24px;
 }
+
+@media (max-width: 1100px){
+  .sidebar{
+    width: 60px;
+  }
+
+  .sidebar-item-heading{
+    display: none;
+  }
+}

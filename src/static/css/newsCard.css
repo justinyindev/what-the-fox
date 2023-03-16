@@ -158,7 +158,17 @@ body {
   transform: translateY(-3px);
 }
 
+@media (max-width: 1100px){
+  .newscard-main-card-container{
+    width: 75%;
+  }
+}
+
 @media (max-width: 800px) {
+.newscard-main-card-container{
+  width: 70%;
+}
+
   .newscard-heading-container {
     display: none;
   }

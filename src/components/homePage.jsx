@@ -8,7 +8,7 @@ import NewsCard from "./newsCard";
 import "./../static/css/homePage.css";
 import UserCard from "./userCard";
 
-const PAGE_LIMIT = 5;
+const PAGE_LIMIT = 12;
 
 const HomePage = () => {
   const { headlines } = useSelector((state) => state.headlines);

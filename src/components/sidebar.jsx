@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateUser, setLogin } from "../redux/formSlice";
+import { useNavigate } from "react-router-dom";
 import "../static/css/sidebar.css";
 import Item from "./item";
 
@@ -8,8 +9,10 @@ const Sidebar = () => {
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const refresh = () => {
-    window.location.reload();
+  const navigate = useNavigate()
+
+  const handleHomepage = () => {
+    navigate("/");
   };
 
   const handleBookmarkClick = () => {
@@ -29,7 +32,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-container">
         <li className="sidebar-list">
-          <Item heading={"Home"} onClick={refresh} />
+          <Item heading={"Home"} onClick={handleHomepage} />
           <Item heading={"Bookmarks"} onClick={handleBookmarkClick} />
         </li>
         <li className="sidebar-list footer">

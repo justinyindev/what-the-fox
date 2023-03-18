@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { setHeadlines, appendHeadlines } from "../redux/headlinesSlice";
-import { setIsLoading } from "../redux/loadingSlice";
+import { setHeadlines, appendHeadlines } from "../../redux/headlinesSlice";
+import { setIsLoading } from "../../redux/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeadlines } from "../utils/apiService";
-import LoadingPage from "./loadingPage";
-import NewsCard from "./newsCard";
-import "./../static/css/homePage.css";
-import UserCard from "./userCard";
+import { getHeadlines } from "../../utils/apiService";
+import LoadingPage from "../loadingPage/loadingPage";
+import NewsCard from "./components/newsCard/newsCard";
+import "./homePage.css";
+import UserCard from "../userCard/userCard";
 
 const PAGE_LIMIT = 12;
 
@@ -72,7 +72,9 @@ const HomePage = () => {
         zIndex: loginOpen || createUserOpen ? -1 : 100,
       }}
     >
-      <h1 className="hompage-heading">{userBookmarks.length > 0 ? "Bookmarks" : "Home"}</h1>
+      <h1 className="hompage-heading">
+        {userBookmarks.length > 0 ? "Bookmarks" : "Home"}
+      </h1>
       <UserCard />
       {loading && page === 1 && <LoadingPage />}
       {headlines &&

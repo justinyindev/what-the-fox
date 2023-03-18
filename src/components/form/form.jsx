@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFormLoading } from "../redux/loadingSlice";
-import Typewriter from "typewriter-effect";
-import "../static/css/form.css";
-import { setUserInfo } from "../redux/userSlice";
-import Input from "./input";
+import { setFormLoading } from "../../redux/loadingSlice";
+import { setUserInfo } from "../../redux/userSlice";
+import Input from "./components/input/input";
+import Submit from "./components/submit/submit";
+import "./form.css";
 
 const Form = ({ apiService, heading }) => {
   const dispatch = useDispatch();
@@ -83,21 +83,11 @@ const Form = ({ apiService, heading }) => {
           <h2 className="form-prompt">
             {error && "invalid credentials / account already exists"}
           </h2>
-          <div className="form-submit-container">
-            <button className="form-submit" onClick={handleSubmit}>
-              {formLoading ? (
-                <Typewriter
-                  options={{
-                    strings: ["..."],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                />
-              ) : (
-                heading
-              )}
-            </button>
-          </div>
+          <Submit
+            formLoading={formLoading}
+            handleSubmit={handleSubmit}
+            heading={heading}
+          />
         </div>
       </div>
     </>

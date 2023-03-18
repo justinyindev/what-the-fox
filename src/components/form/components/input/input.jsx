@@ -1,5 +1,5 @@
 import React from "react";
-import "../static/css/input.css";
+import "./input.css";
 
 const Input = ({ handleChange, handleKeyDown, placeholder, autoFocus=false }) => {
   return (

@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCreateUser, setLogin } from "../redux/formSlice";
+import { setCreateUser, setLogin } from "../../redux/formSlice";
 import { useNavigate } from "react-router-dom";
-import "../static/css/sidebar.css";
-import Item from "./item";
-import { setUserBookmarks } from "../redux/userSlice";
+import "./sidebar.css";
+import Item from "../item/item";
+import { setUserBookmarks } from "../../redux/userSlice";
 
 const Sidebar = () => {
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);

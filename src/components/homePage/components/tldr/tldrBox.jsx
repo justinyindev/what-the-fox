@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Typewriter from "typewriter-effect";
-import "./../static/css/tldrBox.css";
+import "./tldrBox.css";
 
 const TldrBox = ({ item }) => {
   const [showTldr, setShowTldr] = useState(false);

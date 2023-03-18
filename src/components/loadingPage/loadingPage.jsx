@@ -1,6 +1,6 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
-import "./../static/css/loadingPage.css";
+import "./loadingPage.css";
 
 const LoadingPage = () => {
   return (

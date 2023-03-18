@@ -1,0 +1,39 @@
+.item {
+  position: relative;
+  border: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 25px;
+  border-radius: 8px;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 18px;
+  padding-left: 32px;
+  margin: 4px;
+}
+
+.item:disabled {
+  opacity: 35%;
+}
+
+.item:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  background-color: #3a3a3a;
+}
+
+.item-svg {
+  position: absolute;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1100px) {
+  .item-heading {
+    display: none;
+  }
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./components/homePage";
+import HomePage from "./components/homePage/homePage";
 import logo from "./static/images/wtv2.png";
 import Marquee from "react-fast-marquee";
 import { useDispatch, useSelector } from "react-redux";
-import Sidebar from "./components/sidebar";
-import Form from "./components/form";
-import ModalShield from "./components/modalShield";
+import Sidebar from "./components/sidebar/sidebar";
+import Form from "./components/form/form";
+import ModalShield from "./components/modalShield/modalShield";
 import { setCreateUser, setLogin } from "./redux/formSlice";
 import { createUser, login } from "./utils/apiService";
 import "./static/css/App.css";

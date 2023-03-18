@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { bookmark } from "../utils/apiService";
-import { svg } from "../static/svg";
-import { appendUserBookmarks } from "../redux/userSlice";
-import "./../static/css/newsCard.css";
-import TldrBox from "./tldrBox";
-import { setLogin } from "../redux/formSlice";
+import { bookmark } from "../../../../utils/apiService";
+import { svg } from "../../../../static/svg";
+import { appendUserBookmarks } from "../../../../redux/userSlice";
+import "./newsCard.css";
+import TldrBox from "../tldr/tldrBox";
+import { setLogin } from "../../../../redux/formSlice";
 
 const separateHeading = (heading) => {
   const splitString = heading.split(" ");

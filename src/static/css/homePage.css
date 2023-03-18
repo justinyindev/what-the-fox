@@ -13,6 +13,12 @@
   min-height: 100vh;
 }
 
+.hompage-heading{
+  padding-left: 12px;
+  color: #ffffff;
+  position: relative;
+}
+
 @media (max-width: 1100px){
   .homepage-container{
     left: 76px;

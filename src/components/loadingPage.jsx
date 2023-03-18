@@ -7,7 +7,7 @@ const LoadingPage = () => {
     <div className="loading-welcome-container">
       <Typewriter
         options={{
-          strings: ["Loading News"],
+          strings: ["....."],
           autoStart: true,
           loop: true,
         }}

@@ -4,7 +4,6 @@ import { svg } from "../static/svg";
 import "../static/css/sidebar.css";
 
 const Item = ({ heading, onClick }) => {
-  
   const { loading } = useSelector((state) => state.loading);
   return (
     <div>

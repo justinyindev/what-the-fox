@@ -72,12 +72,14 @@ const HomePage = () => {
         zIndex: loginOpen || createUserOpen ? -1 : 100,
       }}
     >
+      <h1 className="hompage-heading">{userBookmarks.length > 0 ? "Bookmarks" : "Home"}</h1>
       <UserCard />
+      {loading && page === 1 && <LoadingPage />}
       {headlines &&
         headlines.map((item) => {
           return <NewsCard item={item} key={item._id} />;
         })}
-      {loading && <LoadingPage />}
+      {loading && page > 1 && <LoadingPage />}
     </div>
   );
 };

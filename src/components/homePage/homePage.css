@@ -3,24 +3,36 @@
   background-color: #2c2c2c;
   border: 0.5px solid #f0f0f161;
   border-bottom: none;
+  border-top: none;
   left: 216px;
   padding: 8px;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   flex-direction: column;
-  max-width: 100%;
-  width: 100%;
+  width: 70%;
+  top: 100px;
   min-height: 100vh;
 }
 
-.hompage-heading{
+.hompage-heading {
   padding-left: 12px;
   color: #ffffff;
   position: relative;
 }
 
-@media (max-width: 1100px){
-  .homepage-container{
+@media (max-width: 1200px) {
+  .homepage-container {
     left: 76px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .homepage-container {
+    left: 0px;
+    width: 100%;
+    border-left: none;
+    border-right: none;
   }
 }

@@ -59,12 +59,18 @@
   height: 24px;
 }
 
-@media (max-width: 1100px){
-  .sidebar{
+@media (max-width: 1200px) {
+  .sidebar {
     width: 60px;
   }
 
-  .sidebar-item-heading{
+  .sidebar-item-heading {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .sidebar {
     display: none;
   }
 }

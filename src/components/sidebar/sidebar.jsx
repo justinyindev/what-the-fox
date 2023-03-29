@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./sidebar.css";
 import Item from "../item/item";
 import { setUserBookmarks } from "../../redux/userSlice";
+import { setHeadlines } from "../../redux/headlinesSlice";
 
 const Sidebar = () => {
   const { loginOpen, createUserOpen } = useSelector((state) => state.form);
@@ -22,7 +23,6 @@ const Sidebar = () => {
       dispatch(setLogin(true));
       return;
     }
-
     dispatch(setUserBookmarks(userInfo.bookmarks));
   };
 

@@ -24,18 +24,30 @@ const HomePage = () => {
     const fetchHeadlines = async () => {
       try {
         dispatch(setIsLoading(true));
-        const response = await getHeadlines(
-          null,
-          null,
-          userBookmarks,
-          page,
-          PAGE_LIMIT
-        );
-        setTotalPages(response.pageInfo.totalPages);
-        if (page === 1) {
+        if (userBookmarks.length > 0) {
+          const response = await getHeadlines(
+            null,
+            null,
+            userBookmarks,
+            1,
+            PAGE_LIMIT
+          );
           dispatch(setHeadlines(response.headlines));
+          setTotalPages(response.pageInfo.totalPages);
         } else {
-          dispatch(appendHeadlines(response.headlines));
+          const response = await getHeadlines(
+            null,
+            null,
+            userBookmarks,
+            page,
+            PAGE_LIMIT
+          );
+          if (page === 1) {
+            dispatch(setHeadlines(response.headlines));
+          } else {
+            dispatch(appendHeadlines(response.headlines));
+          }
+          setTotalPages(response.pageInfo.totalPages);
         }
 
         setScrollPos(window.scrollY);

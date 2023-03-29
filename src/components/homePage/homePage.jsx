@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { setHeadlines, appendHeadlines } from "../../redux/headlinesSlice";
+import React, { useCallback, useEffect, useState } from "react";
+import { appendHeadlines, setHeadlines } from "../../redux/headlinesSlice";
 import { setIsLoading } from "../../redux/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeadlines } from "../../utils/apiService";
@@ -20,43 +20,35 @@ const HomePage = () => {
   const [scrollPos, setScrollPos] = useState(0);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        dispatch(setIsLoading(true));
-        if (userBookmarks.length > 0) {
-          const response = await getHeadlines(
-            null,
-            null,
-            userBookmarks,
-            1,
-            PAGE_LIMIT
-          );
-          dispatch(setHeadlines(response.headlines));
-          setTotalPages(response.pageInfo.totalPages);
-        } else {
-          const response = await getHeadlines(
-            null,
-            null,
-            userBookmarks,
-            page,
-            PAGE_LIMIT
-          );
-          if (page === 1) {
-            dispatch(setHeadlines(response.headlines));
-          } else {
-            dispatch(appendHeadlines(response.headlines));
-          }
-          setTotalPages(response.pageInfo.totalPages);
-        }
-
-        setScrollPos(window.scrollY);
-        dispatch(setIsLoading(false));
-      } catch (error) {
-        console.error(error);
+  const fetchHeadlines = useCallback(async () => {
+    try {
+      if (userBookmarks.length > 0) {
+        dispatch(setHeadlines([]));
+        setPage(1);
       }
-    };
+      console.log(page);
+      dispatch(setIsLoading(true));
+      const response = await getHeadlines(
+        null,
+        null,
+        userBookmarks,
+        userBookmarks.length > 0 ? 1 : page,
+        PAGE_LIMIT
+      );
 
+      page === 1
+        ? dispatch(setHeadlines(response.headlines))
+        : dispatch(appendHeadlines(response.headlines));
+
+      setTotalPages(response.pageInfo.totalPages);
+      setScrollPos(window.scrollY);
+      dispatch(setIsLoading(false));
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch, page, userBookmarks]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
@@ -67,11 +59,14 @@ const HomePage = () => {
         }
       }
     };
-    fetchHeadlines();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [page, totalPages, userBookmarks, dispatch]);
+  }, [page, totalPages]);
+
+  useEffect(() => {
+    fetchHeadlines();
+  }, [fetchHeadlines]);
 
   useEffect(() => {
     window.scrollTo(0, scrollPos);
@@ -88,12 +83,12 @@ const HomePage = () => {
         {userBookmarks.length > 0 ? "Bookmarks" : "Home"}
       </h1>
       <UserCard />
-      {loading && page === 1 && <LoadingPage />}
-      {headlines &&
-        headlines.map((item) => {
-          return <NewsCard item={item} key={item._id} />;
-        })}
-      {loading && page > 1 && <LoadingPage />}
+      {headlines
+        ? headlines.map((item) => {
+            return <NewsCard item={item} key={item._id} />;
+          })
+        : null}
+      {loading && <LoadingPage />}
     </div>
   );
 };

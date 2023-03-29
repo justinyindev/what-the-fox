@@ -15,6 +15,7 @@ const Sidebar = () => {
 
   const handleHomepage = () => {
     dispatch(setUserBookmarks([]));
+    dispatch(setHeadlines([]));
     navigate("/");
   };
 

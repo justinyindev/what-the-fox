@@ -60,7 +60,6 @@ body {
 .main-content{
   display: flex;
   flex-direction: row;
-  overflow: hidden;
 }
 
 @media (max-width: 1000px) {

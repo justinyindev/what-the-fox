@@ -17,6 +17,7 @@ const Sidebar = () => {
     dispatch(setUserBookmarks([]));
     dispatch(setHeadlines([]));
     navigate("/");
+    window.location.reload();
   };
 
   const handleBookmarkClick = () => {
